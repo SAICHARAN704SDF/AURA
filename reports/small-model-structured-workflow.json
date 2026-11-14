@@ -1,0 +1,58 @@
+{
+  "id": "29d832d6-aaaf-4edc-969e-e61fd7c5185c",
+  "project_id": "aura_papers",
+  "goal_id": "1365b9a4-48ac-4b0b-b40e-58e61af8a9a2",
+  "state": "FAILED",
+  "plan": {
+    "tasks": [
+      {
+        "id": "t1",
+        "description": "Retrieve the content of Table 1 and its surrounding context from document 9a3c3278-3057-5439-901d-d2b725c16cd8, focusing on model names and reported F1 scores.",
+        "agent": "research",
+        "dependencies": [],
+        "tools": [
+          "rag_search"
+        ],
+        "acceptance": [
+          "Evidence references and exact quotes are valid."
+        ],
+        "max_retries": 1,
+        "max_steps": 3,
+        "condition": "always"
+      },
+      {
+        "id": "t2",
+        "description": "Compile a short report summarizing the models listed in Table 1 and their corresponding F1 scores, citing the exact extracted evidence.",
+        "agent": "analysis",
+        "dependencies": [
+          "t1"
+        ],
+        "tools": [
+          "rag_search"
+        ],
+        "acceptance": [
+          "Evidence references and exact quotes are valid."
+        ],
+        "max_retries": 1,
+        "max_steps": 5,
+        "condition": "always"
+      }
+    ]
+  },
+  "tasks": {
+    "t1": {
+      "state": "FAILED",
+      "attempt": 2,
+      "failures": [
+        "http_400",
+        "http_400"
+      ]
+    }
+  },
+  "llm_calls": 3,
+  "tool_calls": 0,
+  "tokens": 1255,
+  "elapsed": 1.916296458002762,
+  "report": null,
+  "error": "task_retry_exhausted"
+}

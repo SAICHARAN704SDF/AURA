@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     agentrouter_api_key: SecretStr = SecretStr('')
     aura_llm_provider: Literal['groq','agentrouter'] = 'groq'
     agentrouter_model: str = 'gpt-5.6-sol'
+    groq_model: str = 'openai/gpt-oss-20b'
     data_dir: str = 'data'
     qdrant_url: str | None = None
     timeout: float = Field(default=30, gt=0, le=120)

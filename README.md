@@ -53,7 +53,11 @@ See [the folder guide](docs/architecture.md) for the source tree and data flow.
 
 Document uploads, persistent Qdrant hybrid retrieval, Cloudflare reranking, cited answers, and spaCy NLP are available. See [RAG](docs/rag.md), [NLP](docs/nlp.md), and [deployment](docs/deployment.md). Local NLP needs `python3 -m spacy download en_core_web_sm`. Use one server worker for local Qdrant.
 
-## AgentRouter paper demo
+## Small-model classroom demo
+
+The dashboard defaults to Quick answer and uses `AURA_LLM_PROVIDER=groq` with `GROQ_MODEL=openai/gpt-oss-20b`. Supply your own Groq credentials. The visual canvas shows recorded execution events; click cards for explanations and expand technical details when needed. **Show saved example · no credits** replays a completed run without new AI calls. See [the demo guide](docs/demo.md). There is no automatic switch to a large model.
+
+## Optional AgentRouter paper demo
 
 Install the tested OpenCode CLI with `npm install --global opencode-ai@1.19.5`. Set `AGENTROUTER_API_KEY` in the ignored `.env`, then set `AURA_LLM_PROVIDER=agentrouter` and `AGENTROUTER_MODEL=gpt-5.6-sol`. Keep the Cloudflare credentials for embeddings and reranking. The AgentRouter adapter invokes the officially supported `opencode` CLI in an isolated temporary directory. It never writes the key to a tracked file. The model request is verified by inference because AgentRouter rejects direct model-list calls from generic HTTP clients. OpenCode adds its own prompt overhead, so reported token usage and latency can be higher than a direct model API call.
 

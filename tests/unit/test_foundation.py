@@ -91,3 +91,41 @@ def test_hf_payload_and_credit_failure():
                 await g.generate('huggingface','Qwen/Qwen3-14B',Request(prompt='test',max_tokens=64),verify=True)
             assert not g.verified
     run(check())
+
+
+def test_small_default_does_not_fall_back_to_large_model():
+    from aura.core import Settings,ServiceError
+    from aura.llm.gateway import Gateway
+    from aura.llm.transport import Transport
+    from aura.contracts import Request
+    async def check():
+        config=Settings(_env_file=None,groq_api_key='test')
+        def handler(request):return httpx.Response(429,json={'error':'quota'})
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            gateway=Gateway(config,Transport(config,client))
+            assert gateway.preferred_generation()==('groq','openai/gpt-oss-20b')
+            gateway.available={'groq':['openai/gpt-oss-20b']}
+            with pytest.raises(ServiceError,match='http_429'):
+                await gateway.generate('groq','openai/gpt-oss-20b',Request(prompt='test'),verify=True)
+            assert gateway.usage=={}
+    asyncio.run(check())
+
+
+def test_small_model_structured_action_envelope():
+    import json
+    from aura.agents.contracts import Action
+    async def check():
+        def handler(request):
+            body=json.loads(request.content)
+            assert body['tool_choice']['function']['name']=='structured_response'
+            assert body['reasoning_effort']=='low'
+            return httpx.Response(200,json={'choices':[{'message':{'tool_calls':[{'function':{'name':'structured_response','arguments':json.dumps({'kind':'tool','tool':'rag_search','arguments':{'question':'Table 1'},'output':None})}}]}}], 'usage':{'total_tokens':25}})
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            gateway=Gateway(settings(groq_api_key='test'),Transport(settings(),client))
+            gateway.available={'groq':['openai/gpt-oss-20b']}
+            result=await gateway.generate('groq','openai/gpt-oss-20b',Request(prompt='Find evidence'),verify=True,schema=Action,function_output=True)
+            action=Action.model_validate_json(result.text)
+            assert action.tool=='rag_search'
+            assert action.arguments=={'question':'Table 1'}
+            assert result.tokens==25
+    run(check())

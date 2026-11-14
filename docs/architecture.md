@@ -73,3 +73,9 @@ Implementation reference: [LangGraph graph API](https://docs.langchain.com/oss/p
 The frontend builds DOM text nodes for model/document output instead of inserting untrusted HTML. Exported files are generated in the browser from retrieved results. It polls every 700 ms; this is live event monitoring, not model token streaming or access to hidden model reasoning. No new Python or JavaScript dependency was introduced for the dashboard. Static assets are included in wheel packaging.
 
 Implementation reference: [FastAPI file responses](https://fastapi.tiangolo.com/advanced/custom-response/) for serving the local page and assets.
+
+## Classroom interface and small model
+
+The buildless dashboard presents document upload, prompting, a connected stage overview, and downloads. Task cards and SVG arrows follow actual dependencies, including branches and joins. The canvas supports horizontal or vertical layouts and a focus view. Click a card to inspect event details. Saved-run replay only reads stored workflow events and explicitly labels the display as recorded. Live updates use polling, not generated animations pretending to be real execution.
+
+The default generator is Groq `openai/gpt-oss-20b` with low reasoning effort. Agent action responses use a forced `structured_response` function envelope, whose arguments are validated by Pydantic. That function only returns data; AURA's existing permission-checked dispatcher remains responsible for executing agent actions. AgentRouter/OpenCode remains available when explicitly configured; there is no automatic expensive fallback.

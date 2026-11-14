@@ -1,0 +1,58 @@
+{
+  "id": "1fb85d4a-20aa-4f30-8f0e-8983aeffec63",
+  "project_id": "aura_papers",
+  "goal_id": "d12b0eb9-21c8-40d3-998d-ebb1cc345c12",
+  "state": "FAILED",
+  "plan": {
+    "tasks": [
+      {
+        "id": "t1",
+        "description": "Search for Table 1 and its F1 scores, collecting exact quotes and citations.",
+        "agent": "research",
+        "dependencies": [],
+        "tools": [
+          "rag_search"
+        ],
+        "acceptance": [
+          "Evidence references and exact quotes are valid."
+        ],
+        "max_retries": 1,
+        "max_steps": 3,
+        "condition": "always"
+      },
+      {
+        "id": "t2",
+        "description": "Write a short report describing the models and F1 scores in Table 1, citing the evidence obtained in t1.",
+        "agent": "analysis",
+        "dependencies": [
+          "t1"
+        ],
+        "tools": [
+          "rag_search"
+        ],
+        "acceptance": [
+          "Evidence references and exact quotes are valid."
+        ],
+        "max_retries": 1,
+        "max_steps": 3,
+        "condition": "always"
+      }
+    ]
+  },
+  "tasks": {
+    "t1": {
+      "state": "FAILED",
+      "attempt": 2,
+      "failures": [
+        "http_400",
+        "http_400"
+      ]
+    }
+  },
+  "llm_calls": 3,
+  "tool_calls": 0,
+  "tokens": 913,
+  "elapsed": 1.841322708001826,
+  "report": null,
+  "error": "task_retry_exhausted"
+}

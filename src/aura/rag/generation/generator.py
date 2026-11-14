@@ -23,7 +23,8 @@ async def query(pipeline,question,document_id=None):
         usage+=result.tokens
         answer=Answer.model_validate_json(result.text)
         try:
-            validate_citations(answer,cs)
+            with span('citation_validation'):
+                validate_citations(answer,cs)
         except ServiceError as exc:
             if attempt or exc.code not in ('invalid_citation','missing_citations'):
                 raise

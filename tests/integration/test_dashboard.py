@@ -21,7 +21,7 @@ def test_dashboard_upload_query_trace_and_errors(tmp_path):
     with TestClient(create_app(Settings(_env_file=None,data_dir=str(tmp_path)))) as client:
         provider=Provider();client.app.state.rag.gateway=provider;client.app.state.rag.embedding.gateway=provider
         assert client.get('/').status_code==200
-        assert 'Live workflow' in client.get('/').text
+        assert 'Watch the steps' in client.get('/').text
         assert client.get('/assets/app.js').status_code==200
         status=client.get('/monitor/status').json()
         assert status['tunnel']['state']=='unverified' and status['credits']=='unknown'

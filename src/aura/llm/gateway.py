@@ -52,7 +52,7 @@ class Gateway:
             return []
 
     @traced('llm')
-    async def generate(self, provider: str, model: str, request: Request, *, verify: bool=False, schema: type[BaseModel] | None=None, system: str | None=None) -> Result:
+    async def generate(self, provider: str, model: str, request: Request, *, verify: bool=False, schema: type[BaseModel] | None=None, system: str | None=None, function_output: bool=False) -> Result:
         emit('model_selected', provider=provider, model=model, max_output_tokens=request.max_tokens)
         if (provider,model) not in candidates('text'): raise ServiceError('invalid_model')
         if model not in self.available.get(provider, []): raise ServiceError('invalid_model')
@@ -79,8 +79,20 @@ class Gateway:
             if system: body['messages'].insert(0, {'role':'system','content':system})
             if provider == 'huggingface': body['max_tokens'] = body.pop('max_completion_tokens')
             if schema: body['response_format']={'type':'json_object'}; body['messages'][-1]['content'] += '\nReturn JSON matching: '+json.dumps(schema.model_json_schema())
+            if schema and function_output and provider == 'groq' and model.startswith('openai/gpt-oss'):
+                # Action objects are application data, not provider-native tool calls.
+                body.pop('response_format', None)
+                body['tools']=[{'type':'function','function':{'name':'structured_response','description':'Return the requested JSON data. This only submits data; it does not execute an action.','parameters':schema.model_json_schema()}}]
+                body['tool_choice']={'type':'function','function':{'name':'structured_response'}}
+                body['messages'].append({'role':'user','content':'Submit your result using structured_response. Put any application action inside its arguments; do not call other functions.'})
             data = await self.transport.request('POST',self.base[provider]+'/chat/completions',headers=self.headers(provider),json=body)
-            try: text = data['choices'][0]['message']['content']
+            try:
+                message = data['choices'][0]['message']
+                if 'tools' in body:
+                    call=message['tool_calls'][0]['function']
+                    if call['name']!='structured_response': raise ServiceError('invalid_structured_output')
+                    text=call['arguments']
+                else: text=message['content']
             except (KeyError,IndexError,TypeError): raise ServiceError('invalid_response') from None
             tokens = data.get('usage',{}).get('total_tokens',0)
         if not isinstance(text,str) or not text.strip(): raise ServiceError('empty_response')
@@ -96,7 +108,7 @@ class Gateway:
     def preferred_generation(self) -> tuple[str, str]:
         if self.settings.aura_llm_provider == 'agentrouter':
             return 'agentrouter', self.settings.agentrouter_model
-        return 'groq', 'openai/gpt-oss-120b'
+        return 'groq', self.settings.groq_model
 
     async def route(self, request: Request, candidates: list[tuple[str,str]], schema: type[BaseModel] | None=None) -> Result:
         for provider,model in candidates:

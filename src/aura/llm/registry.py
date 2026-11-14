@@ -12,6 +12,7 @@ MODELS = [
     Model('huggingface','Qwen/Qwen3-14B',frozenset({'text'})),
     Model('huggingface','meta-llama/Llama-3.1-8B-Instruct',frozenset({'text'})),
     Model('huggingface','openai/gpt-oss-20b',frozenset({'text'})),
+    Model('groq','openai/gpt-oss-20b',frozenset({'text','structured'})),
     Model('groq','openai/gpt-oss-120b',frozenset({'text','structured'})),
     Model('gemini','gemini-3.8-flash',frozenset({'text','structured'})),
     Model('gemini','gemini-3.5-flash-lite',frozenset({'text','structured'})),

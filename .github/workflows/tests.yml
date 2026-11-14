@@ -17,4 +17,5 @@ jobs:
       - run: python -m pytest -q
       - run: python -m compileall -q src scripts tests main.py
       - run: node --check frontend/app.js
+      - run: node tests/unit/test_workflow_canvas.cjs
       - run: python -m pip check
