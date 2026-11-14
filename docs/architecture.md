@@ -1,6 +1,6 @@
 # AURA architecture
 
-AURA is a Python 3.12 research backend. The installable `aura` namespace is retained to keep existing scripts and integrations compatible. `aura.api.application` wires FastAPI, model providers, RAG, NLP, tools, and workflows; `aura.api:app` remains the ASGI entry point. There is no frontend in this repository.
+AURA is a Python 3.12 research backend. The installable `aura` namespace is retained to keep existing scripts and integrations compatible. `aura.api.application` wires FastAPI, model providers, RAG, NLP, tools, and workflows; `aura.api:app` remains the ASGI entry point. A buildless HTML/CSS/JavaScript dashboard in `frontend/` is served by the same application.
 
 ## Concept folders
 
@@ -27,7 +27,7 @@ AURA is a Python 3.12 research backend. The installable `aura` namespace is reta
 | `memory/` | Project-scoped working, episodic, semantic memory and workflow events |
 | `database/` | Existing SQLite workflow connection and schema initialization |
 
-Feature-specific HTTP routes stay beside NLP, RAG, and orchestration. No empty intent classifier, language detector, OCR implementation, frontend, or YAML configuration has been added. Environment settings remain the authoritative configuration. Semantic chunk merging stays in the ingestion pipeline because it uses the existing embedding cache and quota fallback.
+Feature-specific HTTP routes stay beside NLP, RAG, and orchestration. No empty intent classifier, language detector, OCR implementation, or unused YAML configuration has been added. Environment settings remain the authoritative configuration. Semantic chunk merging stays in the ingestion pipeline because it uses the existing embedding cache and quota fallback.
 
 ## Data flow
 
