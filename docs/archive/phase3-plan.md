@@ -1,0 +1,5 @@
+# Phase 3 architecture plan
+
+Baseline: 27 tests pass. Preserve gateway, RAG and NLP public APIs. Add agents/contracts.py for validated graphs and budgets; tools.py for controlled read-only dispatch; persistence.py for SQLite scoped checkpoints/events/episodes/semantic evidence; engine.py for dependency scheduler and specialized roles; routes.py for typed async API. Reuse existing gateway for all LLM requests and existing RAG for evidence. A typed scheduler avoids an extra orchestration dependency and makes transitions/recovery auditable. No arbitrary execution sandbox is claimed.
+
+Tasks execute in bounded waves. Plan validation precedes tools. Tool observations are untrusted JSON. LLM tool choices form bounded observe/act cycles. Independent verifier checks provenance, exact quotes, required tool audits, and explicit numeric comparisons. Unproven semantic claims are INCONCLUSIVE. Recovery reruns only incomplete read-only operations; completed tool results are persisted with stable invocation keys. All memory queries require project/workflow scope. API is localhost-only, not authenticated multi-tenant isolation.

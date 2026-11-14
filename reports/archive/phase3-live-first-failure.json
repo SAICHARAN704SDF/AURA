@@ -1,0 +1,172 @@
+{
+  "workflow": {
+    "id": "8c2d3a60-fef9-4ad4-b8cd-3a62cd61046d",
+    "project_id": "acceptance",
+    "goal_id": "5d405b16-b996-4be9-941b-b3d0a9c05046",
+    "state": "FAILED",
+    "plan": {
+      "tasks": [
+        {
+          "id": "t1",
+          "description": "Retrieve the reported mirror diameter and the stated minimum requirement from document 87477d62-3b5c-588f-9e28-839b161acf65.",
+          "agent": "research",
+          "dependencies": [],
+          "tools": [
+            "rag_search",
+            "document_read"
+          ],
+          "acceptance": [
+            "Exact quoted measurement of the mirror diameter is captured",
+            "Exact quoted minimum requirement is captured"
+          ],
+          "max_retries": 1,
+          "max_steps": 3,
+          "condition": "always"
+        },
+        {
+          "id": "t2",
+          "description": "Compare the retrieved mirror diameter with the minimum requirement using arithmetic.",
+          "agent": "analysis",
+          "dependencies": [
+            "t1"
+          ],
+          "tools": [
+            "calculator",
+            "rag_search"
+          ],
+          "acceptance": [
+            "Numeric comparison result (e.g., meets/does not meet requirement) is calculated",
+            "Result is expressed with clear units"
+          ],
+          "max_retries": 1,
+          "max_steps": 3,
+          "condition": "always"
+        },
+        {
+          "id": "t3",
+          "description": "Generate a concise report stating whether the reported mirror diameter satisfies the minimum requirement, including exact citations from the source document.",
+          "agent": "reporting",
+          "dependencies": [
+            "t2"
+          ],
+          "tools": [],
+          "acceptance": [
+            "Report includes the comparison outcome",
+            "Report includes exact quotes and document references"
+          ],
+          "max_retries": 1,
+          "max_steps": 3,
+          "condition": "always"
+        }
+      ]
+    },
+    "tasks": {
+      "t1": {
+        "state": "FAILED",
+        "attempt": 2,
+        "failures": [
+          "http_400",
+          "invalid_structured_output"
+        ]
+      }
+    },
+    "llm_calls": 3,
+    "tool_calls": 0,
+    "tokens": 1275,
+    "elapsed": 4.069883957999991,
+    "report": null,
+    "error": "task_retry_exhausted"
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "time": 1793817134.377089,
+      "state": "PLANNING",
+      "type": "planning"
+    },
+    {
+      "sequence": 2,
+      "time": 1793817134.3773131,
+      "state": "PLANNING",
+      "type": "llm_started",
+      "provider": "groq"
+    },
+    {
+      "sequence": 3,
+      "time": 1793817136.297207,
+      "state": "PLANNING",
+      "type": "llm_completed",
+      "provider": "groq",
+      "tokens": 1275
+    },
+    {
+      "sequence": 4,
+      "time": 1793817136.2984161,
+      "state": "PLANNING",
+      "type": "plan_validated"
+    },
+    {
+      "sequence": 5,
+      "time": 1793817136.299187,
+      "state": "RUNNING",
+      "type": "running"
+    },
+    {
+      "sequence": 6,
+      "time": 1793817136.300149,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "t1",
+      "agent_id": "research",
+      "attempt": 0
+    },
+    {
+      "sequence": 7,
+      "time": 1793817136.303114,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "groq"
+    },
+    {
+      "sequence": 8,
+      "time": 1793817136.905503,
+      "state": "RUNNING",
+      "type": "task_failed",
+      "task_id": "t1",
+      "error": "http_400"
+    },
+    {
+      "sequence": 9,
+      "time": 1793817136.906558,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "t1",
+      "agent_id": "research",
+      "attempt": 1
+    },
+    {
+      "sequence": 10,
+      "time": 1793817136.910646,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "groq"
+    },
+    {
+      "sequence": 11,
+      "time": 1793817138.4449432,
+      "state": "RUNNING",
+      "type": "task_failed",
+      "task_id": "t1",
+      "error": "invalid_structured_output"
+    },
+    {
+      "sequence": 12,
+      "time": 1793817138.446385,
+      "state": "FAILED",
+      "type": "failed",
+      "error": "task_retry_exhausted"
+    }
+  ],
+  "rss_mb": 103.71875,
+  "embedding_calls": 1
+}

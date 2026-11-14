@@ -1,0 +1,2 @@
+# Install the authoritative dependency set from pyproject.toml.
+-e .

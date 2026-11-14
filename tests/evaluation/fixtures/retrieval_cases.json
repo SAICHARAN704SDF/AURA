@@ -1,0 +1,13 @@
+{
+  "documents": [
+    {"name":"mirrors.txt","text":"The telescope uses a blue mirror with diameter 2.4 meters."},
+    {"name":"dataset.txt","text":"The PROMID dataset contains multilingual tweets about misinformation."},
+    {"name":"model.txt","text":"The RoBERTa classifier reports a weighted F1 score of 0.81."}
+  ],
+  "queries": [
+    {"question":"telescope mirror diameter","expected":"mirrors.txt","quote":"2.4 meters"},
+    {"question":"PROMID multilingual tweets","expected":"dataset.txt","quote":"multilingual tweets"},
+    {"question":"RoBERTa weighted F1","expected":"model.txt","quote":"0.81"},
+    {"question":"volcano eruption","expected":null,"quote":null}
+  ]
+}

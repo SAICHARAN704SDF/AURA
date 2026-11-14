@@ -1,0 +1,105 @@
+{
+  "prompt": "Write a concise research review of the uploaded AURORA misinformation detection paper. Explain the problem, PROMID dataset, preprocessing, compared models, reported results, dashboard functionality, and limitations. Separate reported claims from your critical assessment. Use exact short citations from retrieved chunks; do not invent experiments or numerical results.",
+  "workflow": {
+    "id": "7ed50e66-fcc6-496d-914f-deda709c0ac0",
+    "project_id": "aura_papers",
+    "goal_id": "5815bc4b-dee8-40a9-b8be-d6716fa0fdb1",
+    "state": "FAILED",
+    "plan": {
+      "tasks": [
+        {
+          "id": "research_evidence",
+          "description": "Retrieve exact evidence from document 9a3c3278-3057-5439-901d-d2b725c16cd8 covering the problem, PROMID dataset, preprocessing, compared models, reported results, dashboard functionality, and stated limitations. Record short verbatim quotations with chunk references; omit unsupported details.",
+          "agent": "research",
+          "dependencies": [],
+          "tools": [
+            "rag_search",
+            "document_read"
+          ],
+          "acceptance": [
+            "All 7 requested topics have at least one retrieved evidence item or are explicitly marked not found.",
+            "Every evidence item includes an exact short quote and a valid chunk reference.",
+            "All evidence comes from the specified document."
+          ],
+          "max_retries": 2,
+          "max_steps": 5,
+          "condition": "always"
+        },
+        {
+          "id": "analyze_claims",
+          "description": "Using only retrieved evidence, distinguish paper-reported claims from critical assessment. Use calculator to recompute every feasible comparison among stated numerical results, preserving the paper's metrics and avoiding inferred experiments.",
+          "agent": "analysis",
+          "dependencies": [
+            "research_evidence"
+          ],
+          "tools": [
+            "calculator",
+            "rag_search"
+          ],
+          "acceptance": [
+            "Every numerical comparison identifies its source values and calculator result.",
+            "Every assessment point is labeled as interpretation rather than a paper-reported claim.",
+            "No numerical result absent from retrieved evidence is introduced."
+          ],
+          "max_retries": 1,
+          "max_steps": 4,
+          "condition": "evidence_available"
+        },
+        {
+          "id": "verify_evidence",
+          "description": "Independently audit the research and analysis outputs against the retrieved chunks, checking quotation accuracy, references, topic coverage, arithmetic, and unsupported claims. Produce a pass/fail checklist with corrections for each failure.",
+          "agent": "verification",
+          "dependencies": [
+            "research_evidence",
+            "analyze_claims"
+          ],
+          "tools": [],
+          "acceptance": [
+            "Each quoted passage is checked character-for-character against its cited chunk.",
+            "Every stated number and calculated comparison is checked against source values.",
+            "The audit reports pass or fail for all 7 requested topics and lists every detected unsupported claim."
+          ],
+          "max_retries": 1,
+          "max_steps": 3,
+          "condition": "evidence_available"
+        },
+        {
+          "id": "write_review",
+          "description": "Write a concise research review covering all requested topics. Clearly separate reported claims from critical assessment, attach exact short chunk citations to factual claims, and state when requested information is unavailable rather than guessing.",
+          "agent": "reporting",
+          "dependencies": [
+            "research_evidence",
+            "analyze_claims"
+          ],
+          "tools": [],
+          "acceptance": [
+            "The review explicitly covers the problem, PROMID dataset, preprocessing, compared models, results, dashboard, and limitations.",
+            "Reported claims and critical assessment appear in clearly labeled separate sections.",
+            "Every numerical claim and substantive paper claim has an exact short quote with a chunk reference.",
+            "No experiment, metric, dataset property, or dashboard feature unsupported by evidence is asserted."
+          ],
+          "max_retries": 1,
+          "max_steps": 4,
+          "condition": "evidence_available"
+        }
+      ]
+    },
+    "tasks": {
+      "research_evidence": {
+        "state": "FAILED",
+        "attempt": 3,
+        "failures": [
+          "context_budget_exhausted",
+          "context_budget_exhausted",
+          "required_tool_missing"
+        ]
+      }
+    },
+    "llm_calls": 8,
+    "tool_calls": 6,
+    "tokens": 68186,
+    "elapsed": 80.28985375000047,
+    "report": null,
+    "error": "task_retry_exhausted"
+  }
+}

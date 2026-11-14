@@ -1,0 +1,279 @@
+{
+  "events": [
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": null,
+      "stage": "server_request",
+      "status": "started",
+      "method": "POST",
+      "endpoint": "/rag/query",
+      "sequence": 36,
+      "time": 1794657946.064351
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": null,
+      "stage": "answer_generation",
+      "status": "started",
+      "span_id": "4dc4c4f50ba2406a850114c89519546a",
+      "sequence": 37,
+      "time": 1794657946.065239
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "4dc4c4f50ba2406a850114c89519546a",
+      "stage": "retrieval",
+      "status": "started",
+      "span_id": "d81111ebfc694e35abc273b3de771368",
+      "sequence": 38,
+      "time": 1794657946.065284
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "d81111ebfc694e35abc273b3de771368",
+      "stage": "embeddings",
+      "status": "started",
+      "span_id": "8e75f17876de447898d5ac4f077e8f6e",
+      "sequence": 39,
+      "time": 1794657946.066172
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "8e75f17876de447898d5ac4f077e8f6e",
+      "stage": "embedding_cache",
+      "status": "info",
+      "hits": 0,
+      "misses": 1,
+      "model": "@cf/baai/bge-m3",
+      "dimensions": 1024,
+      "sequence": 40,
+      "time": 1794657946.066304
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "8e75f17876de447898d5ac4f077e8f6e",
+      "stage": "provider_request",
+      "status": "started",
+      "host": "api.cloudflare.com",
+      "method": "POST",
+      "attempt": 1,
+      "sequence": 41,
+      "time": 1794657946.066668
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "8e75f17876de447898d5ac4f077e8f6e",
+      "stage": "provider_request",
+      "status": "completed",
+      "host": "api.cloudflare.com",
+      "http_status": 200,
+      "attempt": 1,
+      "sequence": 42,
+      "time": 1794657946.2510772
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "8e75f17876de447898d5ac4f077e8f6e",
+      "stage": "embeddings",
+      "status": "completed",
+      "span_id": "8e75f17876de447898d5ac4f077e8f6e",
+      "duration_ms": 192.14,
+      "sequence": 43,
+      "time": 1794657946.258326
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "d81111ebfc694e35abc273b3de771368",
+      "stage": "dense_search",
+      "status": "started",
+      "span_id": "ed026c25fe044716a60edadfd6260534",
+      "sequence": 44,
+      "time": 1794657946.258388
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "ed026c25fe044716a60edadfd6260534",
+      "stage": "dense_search",
+      "status": "completed",
+      "span_id": "ed026c25fe044716a60edadfd6260534",
+      "duration_ms": 5.31,
+      "sequence": 45,
+      "time": 1794657946.263711
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "d81111ebfc694e35abc273b3de771368",
+      "stage": "bm25_fusion",
+      "status": "completed",
+      "dense_candidates": 10,
+      "lexical_candidates": 10,
+      "corpus_chunks": 23,
+      "sequence": 46,
+      "time": 1794657946.267232
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "d81111ebfc694e35abc273b3de771368",
+      "stage": "reranking",
+      "status": "started",
+      "span_id": "2b9aab97133247019677c04711db0fc9",
+      "sequence": 47,
+      "time": 1794657946.267298
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "2b9aab97133247019677c04711db0fc9",
+      "stage": "provider_request",
+      "status": "started",
+      "host": "api.cloudflare.com",
+      "method": "POST",
+      "attempt": 1,
+      "sequence": 48,
+      "time": 1794657946.2675998
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "2b9aab97133247019677c04711db0fc9",
+      "stage": "provider_request",
+      "status": "completed",
+      "host": "api.cloudflare.com",
+      "http_status": 200,
+      "attempt": 1,
+      "sequence": 49,
+      "time": 1794657946.771725
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "2b9aab97133247019677c04711db0fc9",
+      "stage": "reranking",
+      "status": "completed",
+      "span_id": "2b9aab97133247019677c04711db0fc9",
+      "duration_ms": 504.49,
+      "sequence": 50,
+      "time": 1794657946.771801
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "d81111ebfc694e35abc273b3de771368",
+      "stage": "retrieval",
+      "status": "completed",
+      "span_id": "d81111ebfc694e35abc273b3de771368",
+      "duration_ms": 706.58,
+      "sequence": 51,
+      "time": 1794657946.7718751
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "4dc4c4f50ba2406a850114c89519546a",
+      "stage": "context_assembly",
+      "status": "started",
+      "span_id": "aad39d1296f04ef7a51ce7d39ac7d5d8",
+      "sequence": 52,
+      "time": 1794657946.771948
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "aad39d1296f04ef7a51ce7d39ac7d5d8",
+      "stage": "context_assembly",
+      "status": "completed",
+      "span_id": "aad39d1296f04ef7a51ce7d39ac7d5d8",
+      "duration_ms": 0.21,
+      "sequence": 53,
+      "time": 1794657946.772161
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "4dc4c4f50ba2406a850114c89519546a",
+      "stage": "llm",
+      "status": "started",
+      "span_id": "b9314e4653b947f78720c04dc637738a",
+      "sequence": 54,
+      "time": 1794657946.7722812
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "b9314e4653b947f78720c04dc637738a",
+      "stage": "model_selected",
+      "status": "info",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "max_output_tokens": 1024,
+      "sequence": 55,
+      "time": 1794657946.7723122
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "b9314e4653b947f78720c04dc637738a",
+      "stage": "agentrouter_client",
+      "status": "started",
+      "span_id": "529e5fcb9173493abbc99be5a6100bc1",
+      "sequence": 56,
+      "time": 1794657946.7736561
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "529e5fcb9173493abbc99be5a6100bc1",
+      "stage": "agentrouter_connection",
+      "status": "info",
+      "host": "agentrouter.org",
+      "client": "opencode",
+      "model": "gpt-5.6-sol",
+      "sequence": 57,
+      "time": 1794657946.773673
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "529e5fcb9173493abbc99be5a6100bc1",
+      "stage": "agentrouter_client",
+      "status": "completed",
+      "span_id": "529e5fcb9173493abbc99be5a6100bc1",
+      "duration_ms": 11061.44,
+      "sequence": 58,
+      "time": 1794657957.835595
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "b9314e4653b947f78720c04dc637738a",
+      "stage": "token_usage",
+      "status": "completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 8309,
+      "sequence": 59,
+      "time": 1794657957.838294
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "b9314e4653b947f78720c04dc637738a",
+      "stage": "llm",
+      "status": "completed",
+      "span_id": "b9314e4653b947f78720c04dc637738a",
+      "duration_ms": 11065.96,
+      "sequence": 60,
+      "time": 1794657957.838376
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": "4dc4c4f50ba2406a850114c89519546a",
+      "stage": "answer_generation",
+      "status": "completed",
+      "span_id": "4dc4c4f50ba2406a850114c89519546a",
+      "duration_ms": 11773.05,
+      "sequence": 61,
+      "time": 1794657957.83844
+    },
+    {
+      "trace_id": "3c43f9a8-6542-41a7-83fc-d9def3523ad6",
+      "parent_id": null,
+      "stage": "server_request",
+      "status": "completed",
+      "method": "POST",
+      "endpoint": "/rag/query",
+      "http_status": 200,
+      "duration_ms": 11774.83,
+      "sequence": 62,
+      "time": 1794657957.8393211
+    }
+  ],
+  "workflow_id": null
+}

@@ -1,0 +1,233 @@
+{
+  "workflow": {
+    "id": "dfa3798a-2e99-48d2-84ca-5d8e303fdcec",
+    "project_id": "acceptance",
+    "goal_id": "dd0501fe-711e-4dfd-afc7-e0a39a7d4a1a",
+    "state": "FAILED",
+    "plan": {
+      "tasks": [
+        {
+          "id": "t1_research_mirror",
+          "description": "Search the provided document for the reported mirror diameter of the telescope and retrieve the exact quoted sentence.",
+          "agent": "research",
+          "dependencies": [],
+          "tools": [
+            "rag_search",
+            "document_read"
+          ],
+          "acceptance": [
+            "Exact quote containing the mirror diameter is captured with citation."
+          ],
+          "max_retries": 1,
+          "max_steps": 3,
+          "condition": "always"
+        },
+        {
+          "id": "t2_research_requirement",
+          "description": "Locate the stated minimum mirror diameter requirement in the same document and capture the exact quoted requirement.",
+          "agent": "research",
+          "dependencies": [],
+          "tools": [
+            "rag_search",
+            "document_read"
+          ],
+          "acceptance": [
+            "Exact quote of the minimum required diameter is captured with citation."
+          ],
+          "max_retries": 1,
+          "max_steps": 3,
+          "condition": "always"
+        },
+        {
+          "id": "t3_compare",
+          "description": "Use the calculator tool to compare the reported mirror diameter with the minimum requirement and determine if it meets or exceeds the requirement.",
+          "agent": "analysis",
+          "dependencies": [
+            "t1_research_mirror",
+            "t2_research_requirement"
+          ],
+          "tools": [
+            "calculator"
+          ],
+          "acceptance": [
+            "Numeric comparison result (e.g., reported >= requirement) is produced."
+          ],
+          "max_retries": 1,
+          "max_steps": 3,
+          "condition": "evidence_available"
+        },
+        {
+          "id": "t4_report",
+          "description": "Compile a brief report stating the reported mirror diameter, the minimum required diameter, and the comparison result, including exact citations for both values.",
+          "agent": "reporting",
+          "dependencies": [
+            "t3_compare"
+          ],
+          "tools": [],
+          "acceptance": [
+            "Report includes both quoted values with citations and a clear statement of whether the requirement is met."
+          ],
+          "max_retries": 1,
+          "max_steps": 3,
+          "condition": "always"
+        }
+      ]
+    },
+    "tasks": {
+      "t1_research_mirror": {
+        "state": "FAILED",
+        "attempt": 2,
+        "failures": [
+          "http_400",
+          "http_400"
+        ]
+      },
+      "t2_research_requirement": {
+        "state": "RUNNING",
+        "attempt": 1,
+        "failures": [
+          "http_400"
+        ]
+      }
+    },
+    "llm_calls": 5,
+    "tool_calls": 0,
+    "tokens": 1224,
+    "elapsed": 2.8564621249988704,
+    "report": null,
+    "error": "task_retry_exhausted",
+    "started_at": 1793817194.974417
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "time": 1793817194.97454,
+      "state": "PLANNING",
+      "type": "planning"
+    },
+    {
+      "sequence": 2,
+      "time": 1793817194.974693,
+      "state": "PLANNING",
+      "type": "llm_started",
+      "provider": "groq"
+    },
+    {
+      "sequence": 3,
+      "time": 1793817196.715151,
+      "state": "PLANNING",
+      "type": "llm_completed",
+      "provider": "groq",
+      "tokens": 1224
+    },
+    {
+      "sequence": 4,
+      "time": 1793817196.7161841,
+      "state": "PLANNING",
+      "type": "plan_validated"
+    },
+    {
+      "sequence": 5,
+      "time": 1793817196.716697,
+      "state": "RUNNING",
+      "type": "running"
+    },
+    {
+      "sequence": 6,
+      "time": 1793817196.717299,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "t1_research_mirror",
+      "agent_id": "research",
+      "attempt": 0
+    },
+    {
+      "sequence": 7,
+      "time": 1793817196.7197728,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "groq"
+    },
+    {
+      "sequence": 8,
+      "time": 1793817196.723503,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "t2_research_requirement",
+      "agent_id": "research",
+      "attempt": 0
+    },
+    {
+      "sequence": 9,
+      "time": 1793817196.727092,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "groq"
+    },
+    {
+      "sequence": 10,
+      "time": 1793817197.217876,
+      "state": "RUNNING",
+      "type": "task_failed",
+      "task_id": "t1_research_mirror",
+      "error": "http_400"
+    },
+    {
+      "sequence": 11,
+      "time": 1793817197.219091,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "t1_research_mirror",
+      "agent_id": "research",
+      "attempt": 1
+    },
+    {
+      "sequence": 12,
+      "time": 1793817197.22178,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "groq"
+    },
+    {
+      "sequence": 13,
+      "time": 1793817197.2652931,
+      "state": "RUNNING",
+      "type": "task_failed",
+      "task_id": "t2_research_requirement",
+      "error": "http_400"
+    },
+    {
+      "sequence": 14,
+      "time": 1793817197.2656698,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "t2_research_requirement",
+      "agent_id": "research",
+      "attempt": 1
+    },
+    {
+      "sequence": 15,
+      "time": 1793817197.266407,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "groq"
+    },
+    {
+      "sequence": 16,
+      "time": 1793817197.8277178,
+      "state": "RUNNING",
+      "type": "task_failed",
+      "task_id": "t1_research_mirror",
+      "error": "http_400"
+    },
+    {
+      "sequence": 17,
+      "time": 1793817197.8302379,
+      "state": "FAILED",
+      "type": "failed",
+      "error": "task_retry_exhausted"
+    }
+  ],
+  "rss_mb": 104.28125,
+  "embedding_calls": 1
+}

@@ -1,0 +1,8 @@
+{
+  "prompt": "Summarize the AURORA paper: its research problem, PROMID dataset, proposed approach, and main result. Use short exact quotations as citations. Distinguish this paper's AURORA system from the assistant answering.",
+  "http_status": 422,
+  "seconds": 15.91,
+  "result": {
+    "error": "invalid_citation"
+  }
+}

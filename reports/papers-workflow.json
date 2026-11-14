@@ -1,0 +1,878 @@
+{
+  "workflow": {
+    "id": "738f04c8-dc67-43ba-8f0e-4bc40c9d645e",
+    "project_id": "aura_papers",
+    "goal_id": "bd1b9673-2f9d-4edf-be67-c5fb7e1a0548",
+    "state": "COMPLETED",
+    "plan": {
+      "tasks": [
+        {
+          "id": "research_1",
+          "description": "Research Transformer in document_id 2a007c75-da5e-50f2-a7f2-eaadc2317f84. Find a short exact quote and summarize its central method and contribution. Search question: What architecture and training advantages does the Transformer paper claim?",
+          "agent": "research",
+          "dependencies": [],
+          "tools": [
+            "rag_search"
+          ],
+          "acceptance": [
+            "One exact cited quote and a short method summary."
+          ],
+          "max_retries": 2,
+          "max_steps": 3,
+          "condition": "always"
+        },
+        {
+          "id": "research_2",
+          "description": "Research RAG in document_id b2cf6bf5-9de6-5a55-b352-920621b0421b. Find a short exact quote and summarize its central method and contribution. Search question: How does RAG combine parametric and non-parametric memory?",
+          "agent": "research",
+          "dependencies": [],
+          "tools": [
+            "rag_search"
+          ],
+          "acceptance": [
+            "One exact cited quote and a short method summary."
+          ],
+          "max_retries": 2,
+          "max_steps": 3,
+          "condition": "always"
+        },
+        {
+          "id": "research_3",
+          "description": "Research ReAct in document_id 21da6ab1-7837-52da-81e3-00b6430c8feb. Find a short exact quote and summarize its central method and contribution. Search question: How does ReAct combine reasoning traces with actions?",
+          "agent": "research",
+          "dependencies": [],
+          "tools": [
+            "rag_search"
+          ],
+          "acceptance": [
+            "One exact cited quote and a short method summary."
+          ],
+          "max_retries": 2,
+          "max_steps": 3,
+          "condition": "always"
+        },
+        {
+          "id": "research_4",
+          "description": "Research Self-RAG in document_id 838533ea-177c-574b-97d2-6967a94dfe8c. Find a short exact quote and summarize its central method and contribution. Search question: How does Self-RAG decide when to retrieve and critique evidence?",
+          "agent": "research",
+          "dependencies": [],
+          "tools": [
+            "rag_search"
+          ],
+          "acceptance": [
+            "One exact cited quote and a short method summary."
+          ],
+          "max_retries": 2,
+          "max_steps": 3,
+          "condition": "always"
+        },
+        {
+          "id": "synthesis",
+          "description": "Compare the four papers: Transformer foundation, RAG retrieval, ReAct tool use, and Self-RAG adaptive retrieval. Identify concrete implications for AURA and limitations. Use only prior cited evidence.",
+          "agent": "analysis",
+          "dependencies": [
+            "research_1",
+            "research_2",
+            "research_3",
+            "research_4"
+          ],
+          "tools": [],
+          "acceptance": [
+            "A comparative synthesis grounded in the four research outputs."
+          ],
+          "max_retries": 1,
+          "max_steps": 2,
+          "condition": "always"
+        },
+        {
+          "id": "report",
+          "description": "Assemble the cited research report.",
+          "agent": "reporting",
+          "dependencies": [
+            "research_1",
+            "research_2",
+            "research_3",
+            "research_4",
+            "synthesis"
+          ],
+          "tools": [],
+          "acceptance": [
+            "A report with source evidence."
+          ],
+          "max_retries": 0,
+          "max_steps": 1,
+          "condition": "always"
+        }
+      ]
+    },
+    "tasks": {
+      "research_1": {
+        "state": "COMPLETED",
+        "attempt": 0,
+        "failures": [],
+        "output": {
+          "summary": "The Transformer replaces recurrent and convolutional sequence processing with attention that directly models global input-output dependencies. The paper claims this architecture improves training parallelism and achieves state-of-the-art translation quality after only twelve hours on eight P100 GPUs.",
+          "evidence": [
+            {
+              "chunk_id": "df46b8be-3b58-5777-afe1-7c64d6257ccd",
+              "document_id": "2a007c75-da5e-50f2-a7f2-eaadc2317f84",
+              "quote": "relying entirely on an attention mechanism to draw global dependencies between input and output."
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        }
+      },
+      "research_2": {
+        "state": "COMPLETED",
+        "attempt": 1,
+        "failures": [
+          "required_tool_missing"
+        ],
+        "output": {
+          "summary": "RAG couples a pre-trained seq2seq generator\u2019s parametric knowledge with Wikipedia passages retrieved from a dense vector index. It supports sequence-level or token-level passage conditioning and jointly trains retrieval and generation, improving knowledge-intensive QA and factual generation. For AURA, this suggests grounding generated answers in an updateable project-document index while retaining the language model\u2019s generative capabilities.",
+          "evidence": [
+            {
+              "chunk_id": "13a98984-2096-58b8-8276-5d105247116c",
+              "document_id": "b2cf6bf5-9de6-5a55-b352-920621b0421b",
+              "quote": "the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense"
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        }
+      },
+      "research_3": {
+        "state": "COMPLETED",
+        "attempt": 0,
+        "failures": [],
+        "output": {
+          "summary": "ReAct interleaves verbal reasoning traces with task-specific actions. Reasoning creates and revises plans, while actions gather external information that informs subsequent reasoning. Its central contribution is a unified reasoning-and-acting loop that improves grounding and interpretability. For AURA, this supports an agent design that alternates planning, tool use, and observation-driven plan updates.",
+          "evidence": [
+            {
+              "chunk_id": "82563abe-ccd5-59ac-9586-7c4cd35948ae",
+              "document_id": "21da6ab1-7837-52da-81e3-00b6430c8feb",
+              "quote": "prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task"
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        }
+      },
+      "research_4": {
+        "state": "COMPLETED",
+        "attempt": 0,
+        "failures": [],
+        "output": {
+          "summary": "Self-RAG adaptively predicts a Retrieve reflection token from the prompt and current generation. When retrieval is triggered, it generates passage-conditioned candidates, critiques their relevance, support, and usefulness, then ranks candidates during segment-level decoding. Its contribution is replacing fixed retrieval with selective retrieval and self-evaluation to improve factuality and verifiability.",
+          "evidence": [
+            {
+              "chunk_id": "0190f982-4d78-54cf-90ed-8f1068f682ef",
+              "document_id": "838533ea-177c-574b-97d2-6967a94dfe8c",
+              "quote": "SELF-RAG dynamically decides when to retrieve text passages by\npredicting Retrieve ."
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        }
+      },
+      "synthesis": {
+        "state": "COMPLETED",
+        "attempt": 0,
+        "failures": [],
+        "output": {
+          "summary": "The papers form a complementary architecture for AURA. The Transformer supplies the language-model foundation by modeling global dependencies through attention. RAG extends that foundation with parametric and external non-parametric memory, suggesting an index of updateable project documents. ReAct adds an iterative reasoning-and-action loop, supporting planning, tool execution, and observation-driven revision. Self-RAG further makes retrieval conditional rather than automatic, suggesting AURA should retrieve only when needed and evaluate retrieved support before answering. Together, they imply four layers: Transformer generation, RAG grounding, ReAct tool orchestration, and Self-RAG retrieval control. RAG and ReAct address different needs: RAG supplies knowledge, while ReAct governs interaction with external capabilities.",
+          "evidence": [
+            {
+              "chunk_id": "df46b8be-3b58-5777-afe1-7c64d6257ccd",
+              "document_id": "2a007c75-da5e-50f2-a7f2-eaadc2317f84",
+              "quote": "relying entirely on an attention mechanism to draw global dependencies between input and output."
+            },
+            {
+              "chunk_id": "13a98984-2096-58b8-8276-5d105247116c",
+              "document_id": "b2cf6bf5-9de6-5a55-b352-920621b0421b",
+              "quote": "the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense"
+            },
+            {
+              "chunk_id": "82563abe-ccd5-59ac-9586-7c4cd35948ae",
+              "document_id": "21da6ab1-7837-52da-81e3-00b6430c8feb",
+              "quote": "prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task"
+            },
+            {
+              "chunk_id": "0190f982-4d78-54cf-90ed-8f1068f682ef",
+              "document_id": "838533ea-177c-574b-97d2-6967a94dfe8c",
+              "quote": "SELF-RAG dynamically decides when to retrieve text passages by\npredicting Retrieve ."
+            }
+          ],
+          "comparisons": [],
+          "limitations": [
+            "The cited excerpts do not quantify accuracy, latency, compute cost, or implementation complexity for AURA.",
+            "Attention alone does not establish factual grounding or safe tool use.",
+            "External memory quality depends on retrieval and document quality, which the supplied evidence does not evaluate.",
+            "Reasoning traces and adaptive retrieval do not guarantee correct actions or retrieval decisions."
+          ]
+        }
+      },
+      "report": {
+        "state": "COMPLETED",
+        "attempt": 0,
+        "failures": [],
+        "output": {
+          "summary": "The Transformer replaces recurrent and convolutional sequence processing with attention that directly models global input-output dependencies. The paper claims this architecture improves training parallelism and achieves state-of-the-art translation quality after only twelve hours on eight P100 GPUs.\nRAG couples a pre-trained seq2seq generator\u2019s parametric knowledge with Wikipedia passages retrieved from a dense vector index. It supports sequence-level or token-level passage conditioning and jointly trains retrieval and generation, improving knowledge-intensive QA and factual generation. For AURA, this suggests grounding generated answers in an updateable project-document index while retaining the language model\u2019s generative capabilities.\nReAct interleaves verbal reasoning traces with task-specific actions. Reasoning creates and revises plans, while actions gather external information that informs subsequent reasoning. Its central contribution is a unified reasoning-and-acting loop that improves grounding and interpretability. For AURA, this supports an agent design that alternates planning, tool use, and observation-driven plan updates.\nSelf-RAG adaptively predicts a Retrieve reflection token from the prompt and current generation. When retrieval is triggered, it generates passage-conditioned candidates, critiques their relevance, support, and usefulness, then ranks candidates during segment-level decoding. Its contribution is replacing fixed retrieval with selective retrieval and self-evaluation to improve factuality and verifiability.\nThe papers form a complementary architecture for AURA. The Transformer supplies the language-model foundation by modeling global dependencies through attention. RAG extends that foundation with parametric and external non-parametric memory, suggesting an index of updateable project documents. ReAct adds an iterative reasoning-and-action loop, supporting planning, tool execution, and observation-driven revision. Self-RAG further makes retrieval conditional rather than automatic, suggesting AURA should retrieve only when needed and evaluate retrieved support before answering. Together, they imply four layers: Transformer generation, RAG grounding, ReAct tool orchestration, and Self-RAG retrieval control. RAG and ReAct address different needs: RAG supplies knowledge, while ReAct governs interaction with external capabilities.",
+          "evidence": [
+            {
+              "chunk_id": "df46b8be-3b58-5777-afe1-7c64d6257ccd",
+              "document_id": "2a007c75-da5e-50f2-a7f2-eaadc2317f84",
+              "quote": "relying entirely on an attention mechanism to draw global dependencies between input and output."
+            },
+            {
+              "chunk_id": "13a98984-2096-58b8-8276-5d105247116c",
+              "document_id": "b2cf6bf5-9de6-5a55-b352-920621b0421b",
+              "quote": "the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense"
+            },
+            {
+              "chunk_id": "82563abe-ccd5-59ac-9586-7c4cd35948ae",
+              "document_id": "21da6ab1-7837-52da-81e3-00b6430c8feb",
+              "quote": "prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task"
+            },
+            {
+              "chunk_id": "0190f982-4d78-54cf-90ed-8f1068f682ef",
+              "document_id": "838533ea-177c-574b-97d2-6967a94dfe8c",
+              "quote": "SELF-RAG dynamically decides when to retrieve text passages by\npredicting Retrieve ."
+            },
+            {
+              "chunk_id": "df46b8be-3b58-5777-afe1-7c64d6257ccd",
+              "document_id": "2a007c75-da5e-50f2-a7f2-eaadc2317f84",
+              "quote": "relying entirely on an attention mechanism to draw global dependencies between input and output."
+            },
+            {
+              "chunk_id": "13a98984-2096-58b8-8276-5d105247116c",
+              "document_id": "b2cf6bf5-9de6-5a55-b352-920621b0421b",
+              "quote": "the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense"
+            },
+            {
+              "chunk_id": "82563abe-ccd5-59ac-9586-7c4cd35948ae",
+              "document_id": "21da6ab1-7837-52da-81e3-00b6430c8feb",
+              "quote": "prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task"
+            },
+            {
+              "chunk_id": "0190f982-4d78-54cf-90ed-8f1068f682ef",
+              "document_id": "838533ea-177c-574b-97d2-6967a94dfe8c",
+              "quote": "SELF-RAG dynamically decides when to retrieve text passages by\npredicting Retrieve ."
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        }
+      }
+    },
+    "llm_calls": 10,
+    "tool_calls": 4,
+    "tokens": 82283,
+    "elapsed": 71.86521270799858,
+    "report": {
+      "verification": {
+        "outcome": "PASS",
+        "criteria": [
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "citation_and_quote",
+            "outcome": "PASS"
+          },
+          {
+            "criterion": "Evidence references and exact quotes are valid.",
+            "outcome": "PASS"
+          }
+        ],
+        "limitations": [
+          "Exact quotes and explicit numeric relations verified; general semantic entailment is not established."
+        ]
+      },
+      "results": [
+        {
+          "summary": "The Transformer replaces recurrent and convolutional sequence processing with attention that directly models global input-output dependencies. The paper claims this architecture improves training parallelism and achieves state-of-the-art translation quality after only twelve hours on eight P100 GPUs.",
+          "evidence": [
+            {
+              "chunk_id": "df46b8be-3b58-5777-afe1-7c64d6257ccd",
+              "document_id": "2a007c75-da5e-50f2-a7f2-eaadc2317f84",
+              "quote": "relying entirely on an attention mechanism to draw global dependencies between input and output."
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        },
+        {
+          "summary": "RAG couples a pre-trained seq2seq generator\u2019s parametric knowledge with Wikipedia passages retrieved from a dense vector index. It supports sequence-level or token-level passage conditioning and jointly trains retrieval and generation, improving knowledge-intensive QA and factual generation. For AURA, this suggests grounding generated answers in an updateable project-document index while retaining the language model\u2019s generative capabilities.",
+          "evidence": [
+            {
+              "chunk_id": "13a98984-2096-58b8-8276-5d105247116c",
+              "document_id": "b2cf6bf5-9de6-5a55-b352-920621b0421b",
+              "quote": "the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense"
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        },
+        {
+          "summary": "ReAct interleaves verbal reasoning traces with task-specific actions. Reasoning creates and revises plans, while actions gather external information that informs subsequent reasoning. Its central contribution is a unified reasoning-and-acting loop that improves grounding and interpretability. For AURA, this supports an agent design that alternates planning, tool use, and observation-driven plan updates.",
+          "evidence": [
+            {
+              "chunk_id": "82563abe-ccd5-59ac-9586-7c4cd35948ae",
+              "document_id": "21da6ab1-7837-52da-81e3-00b6430c8feb",
+              "quote": "prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task"
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        },
+        {
+          "summary": "Self-RAG adaptively predicts a Retrieve reflection token from the prompt and current generation. When retrieval is triggered, it generates passage-conditioned candidates, critiques their relevance, support, and usefulness, then ranks candidates during segment-level decoding. Its contribution is replacing fixed retrieval with selective retrieval and self-evaluation to improve factuality and verifiability.",
+          "evidence": [
+            {
+              "chunk_id": "0190f982-4d78-54cf-90ed-8f1068f682ef",
+              "document_id": "838533ea-177c-574b-97d2-6967a94dfe8c",
+              "quote": "SELF-RAG dynamically decides when to retrieve text passages by\npredicting Retrieve ."
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        },
+        {
+          "summary": "The papers form a complementary architecture for AURA. The Transformer supplies the language-model foundation by modeling global dependencies through attention. RAG extends that foundation with parametric and external non-parametric memory, suggesting an index of updateable project documents. ReAct adds an iterative reasoning-and-action loop, supporting planning, tool execution, and observation-driven revision. Self-RAG further makes retrieval conditional rather than automatic, suggesting AURA should retrieve only when needed and evaluate retrieved support before answering. Together, they imply four layers: Transformer generation, RAG grounding, ReAct tool orchestration, and Self-RAG retrieval control. RAG and ReAct address different needs: RAG supplies knowledge, while ReAct governs interaction with external capabilities.",
+          "evidence": [
+            {
+              "chunk_id": "df46b8be-3b58-5777-afe1-7c64d6257ccd",
+              "document_id": "2a007c75-da5e-50f2-a7f2-eaadc2317f84",
+              "quote": "relying entirely on an attention mechanism to draw global dependencies between input and output."
+            },
+            {
+              "chunk_id": "13a98984-2096-58b8-8276-5d105247116c",
+              "document_id": "b2cf6bf5-9de6-5a55-b352-920621b0421b",
+              "quote": "the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense"
+            },
+            {
+              "chunk_id": "82563abe-ccd5-59ac-9586-7c4cd35948ae",
+              "document_id": "21da6ab1-7837-52da-81e3-00b6430c8feb",
+              "quote": "prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task"
+            },
+            {
+              "chunk_id": "0190f982-4d78-54cf-90ed-8f1068f682ef",
+              "document_id": "838533ea-177c-574b-97d2-6967a94dfe8c",
+              "quote": "SELF-RAG dynamically decides when to retrieve text passages by\npredicting Retrieve ."
+            }
+          ],
+          "comparisons": [],
+          "limitations": [
+            "The cited excerpts do not quantify accuracy, latency, compute cost, or implementation complexity for AURA.",
+            "Attention alone does not establish factual grounding or safe tool use.",
+            "External memory quality depends on retrieval and document quality, which the supplied evidence does not evaluate.",
+            "Reasoning traces and adaptive retrieval do not guarantee correct actions or retrieval decisions."
+          ]
+        },
+        {
+          "summary": "The Transformer replaces recurrent and convolutional sequence processing with attention that directly models global input-output dependencies. The paper claims this architecture improves training parallelism and achieves state-of-the-art translation quality after only twelve hours on eight P100 GPUs.\nRAG couples a pre-trained seq2seq generator\u2019s parametric knowledge with Wikipedia passages retrieved from a dense vector index. It supports sequence-level or token-level passage conditioning and jointly trains retrieval and generation, improving knowledge-intensive QA and factual generation. For AURA, this suggests grounding generated answers in an updateable project-document index while retaining the language model\u2019s generative capabilities.\nReAct interleaves verbal reasoning traces with task-specific actions. Reasoning creates and revises plans, while actions gather external information that informs subsequent reasoning. Its central contribution is a unified reasoning-and-acting loop that improves grounding and interpretability. For AURA, this supports an agent design that alternates planning, tool use, and observation-driven plan updates.\nSelf-RAG adaptively predicts a Retrieve reflection token from the prompt and current generation. When retrieval is triggered, it generates passage-conditioned candidates, critiques their relevance, support, and usefulness, then ranks candidates during segment-level decoding. Its contribution is replacing fixed retrieval with selective retrieval and self-evaluation to improve factuality and verifiability.\nThe papers form a complementary architecture for AURA. The Transformer supplies the language-model foundation by modeling global dependencies through attention. RAG extends that foundation with parametric and external non-parametric memory, suggesting an index of updateable project documents. ReAct adds an iterative reasoning-and-action loop, supporting planning, tool execution, and observation-driven revision. Self-RAG further makes retrieval conditional rather than automatic, suggesting AURA should retrieve only when needed and evaluate retrieved support before answering. Together, they imply four layers: Transformer generation, RAG grounding, ReAct tool orchestration, and Self-RAG retrieval control. RAG and ReAct address different needs: RAG supplies knowledge, while ReAct governs interaction with external capabilities.",
+          "evidence": [
+            {
+              "chunk_id": "df46b8be-3b58-5777-afe1-7c64d6257ccd",
+              "document_id": "2a007c75-da5e-50f2-a7f2-eaadc2317f84",
+              "quote": "relying entirely on an attention mechanism to draw global dependencies between input and output."
+            },
+            {
+              "chunk_id": "13a98984-2096-58b8-8276-5d105247116c",
+              "document_id": "b2cf6bf5-9de6-5a55-b352-920621b0421b",
+              "quote": "the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense"
+            },
+            {
+              "chunk_id": "82563abe-ccd5-59ac-9586-7c4cd35948ae",
+              "document_id": "21da6ab1-7837-52da-81e3-00b6430c8feb",
+              "quote": "prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task"
+            },
+            {
+              "chunk_id": "0190f982-4d78-54cf-90ed-8f1068f682ef",
+              "document_id": "838533ea-177c-574b-97d2-6967a94dfe8c",
+              "quote": "SELF-RAG dynamically decides when to retrieve text passages by\npredicting Retrieve ."
+            },
+            {
+              "chunk_id": "df46b8be-3b58-5777-afe1-7c64d6257ccd",
+              "document_id": "2a007c75-da5e-50f2-a7f2-eaadc2317f84",
+              "quote": "relying entirely on an attention mechanism to draw global dependencies between input and output."
+            },
+            {
+              "chunk_id": "13a98984-2096-58b8-8276-5d105247116c",
+              "document_id": "b2cf6bf5-9de6-5a55-b352-920621b0421b",
+              "quote": "the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense"
+            },
+            {
+              "chunk_id": "82563abe-ccd5-59ac-9586-7c4cd35948ae",
+              "document_id": "21da6ab1-7837-52da-81e3-00b6430c8feb",
+              "quote": "prompts LLMs to generate both verbal reasoning traces and actions pertaining to a task"
+            },
+            {
+              "chunk_id": "0190f982-4d78-54cf-90ed-8f1068f682ef",
+              "document_id": "838533ea-177c-574b-97d2-6967a94dfe8c",
+              "quote": "SELF-RAG dynamically decides when to retrieve text passages by\npredicting Retrieve ."
+            }
+          ],
+          "comparisons": [],
+          "limitations": []
+        }
+      ],
+      "limitations": [
+        "Exact quotes and explicit numeric relations verified; general semantic entailment is not established."
+      ],
+      "tokens": 82283,
+      "llm_calls": 10,
+      "tool_calls": 4
+    },
+    "error": null,
+    "started_at": 1794300661.650653
+  },
+  "events": [
+    {
+      "sequence": 94,
+      "time": 1794300661.650812,
+      "state": "PLANNING",
+      "type": "plan_loaded",
+      "tasks": 6
+    },
+    {
+      "sequence": 95,
+      "time": 1794300661.651128,
+      "state": "RUNNING",
+      "type": "running"
+    },
+    {
+      "sequence": 96,
+      "time": 1794300661.651305,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "research_1",
+      "agent_id": "research",
+      "attempt": 0
+    },
+    {
+      "sequence": 97,
+      "time": 1794300661.652123,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 98,
+      "time": 1794300661.657452,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "research_2",
+      "agent_id": "research",
+      "attempt": 0
+    },
+    {
+      "sequence": 99,
+      "time": 1794300661.6582558,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 100,
+      "time": 1794300668.758425,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 7358
+    },
+    {
+      "sequence": 101,
+      "time": 1794300668.7587378,
+      "state": "RUNNING",
+      "type": "task_failed",
+      "task_id": "research_2",
+      "error": "required_tool_missing"
+    },
+    {
+      "sequence": 102,
+      "time": 1794300668.758911,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "research_2",
+      "agent_id": "research",
+      "attempt": 1
+    },
+    {
+      "sequence": 103,
+      "time": 1794300668.7601962,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 104,
+      "time": 1794300671.251564,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 7348
+    },
+    {
+      "sequence": 105,
+      "time": 1794300671.25193,
+      "state": "RUNNING",
+      "type": "tool_started",
+      "task_id": "research_1",
+      "tool": "rag_search",
+      "call_id": "research_1:0:0"
+    },
+    {
+      "sequence": 106,
+      "time": 1794300672.206669,
+      "state": "RUNNING",
+      "type": "tool_completed",
+      "task_id": "research_1",
+      "tool": "rag_search",
+      "call_id": "research_1:0:0"
+    },
+    {
+      "sequence": 107,
+      "time": 1794300672.209005,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 108,
+      "time": 1794300677.049105,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 7413
+    },
+    {
+      "sequence": 109,
+      "time": 1794300677.049394,
+      "state": "RUNNING",
+      "type": "tool_started",
+      "task_id": "research_2",
+      "tool": "rag_search",
+      "call_id": "research_2:1:0"
+    },
+    {
+      "sequence": 110,
+      "time": 1794300677.374492,
+      "state": "RUNNING",
+      "type": "tool_completed",
+      "task_id": "research_2",
+      "tool": "rag_search",
+      "call_id": "research_2:1:0"
+    },
+    {
+      "sequence": 111,
+      "time": 1794300677.376873,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 112,
+      "time": 1794300686.712141,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 9273
+    },
+    {
+      "sequence": 113,
+      "time": 1794300686.714216,
+      "state": "RUNNING",
+      "type": "task_completed",
+      "task_id": "research_1",
+      "agent_id": "research"
+    },
+    {
+      "sequence": 114,
+      "time": 1794300689.882472,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 9181
+    },
+    {
+      "sequence": 115,
+      "time": 1794300689.882777,
+      "state": "RUNNING",
+      "type": "task_completed",
+      "task_id": "research_2",
+      "agent_id": "research"
+    },
+    {
+      "sequence": 116,
+      "time": 1794300689.8830762,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "research_3",
+      "agent_id": "research",
+      "attempt": 0
+    },
+    {
+      "sequence": 117,
+      "time": 1794300689.887008,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 118,
+      "time": 1794300689.8940952,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "research_4",
+      "agent_id": "research",
+      "attempt": 0
+    },
+    {
+      "sequence": 119,
+      "time": 1794300689.894882,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 120,
+      "time": 1794300697.96876,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 7349
+    },
+    {
+      "sequence": 121,
+      "time": 1794300697.96911,
+      "state": "RUNNING",
+      "type": "tool_started",
+      "task_id": "research_3",
+      "tool": "rag_search",
+      "call_id": "research_3:0:0"
+    },
+    {
+      "sequence": 122,
+      "time": 1794300698.10263,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 7336
+    },
+    {
+      "sequence": 123,
+      "time": 1794300698.102839,
+      "state": "RUNNING",
+      "type": "tool_started",
+      "task_id": "research_4",
+      "tool": "rag_search",
+      "call_id": "research_4:0:0"
+    },
+    {
+      "sequence": 124,
+      "time": 1794300698.593684,
+      "state": "RUNNING",
+      "type": "tool_completed",
+      "task_id": "research_3",
+      "tool": "rag_search",
+      "call_id": "research_3:0:0"
+    },
+    {
+      "sequence": 125,
+      "time": 1794300698.596313,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 126,
+      "time": 1794300698.690942,
+      "state": "RUNNING",
+      "type": "tool_completed",
+      "task_id": "research_4",
+      "tool": "rag_search",
+      "call_id": "research_4:0:0"
+    },
+    {
+      "sequence": 127,
+      "time": 1794300698.6918871,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 128,
+      "time": 1794300710.78969,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 8870
+    },
+    {
+      "sequence": 129,
+      "time": 1794300710.790695,
+      "state": "RUNNING",
+      "type": "task_completed",
+      "task_id": "research_3",
+      "agent_id": "research"
+    },
+    {
+      "sequence": 130,
+      "time": 1794300712.483552,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 9104
+    },
+    {
+      "sequence": 131,
+      "time": 1794300712.4839191,
+      "state": "RUNNING",
+      "type": "task_completed",
+      "task_id": "research_4",
+      "agent_id": "research"
+    },
+    {
+      "sequence": 132,
+      "time": 1794300712.4841862,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "synthesis",
+      "agent_id": "analysis",
+      "attempt": 0
+    },
+    {
+      "sequence": 133,
+      "time": 1794300712.48612,
+      "state": "RUNNING",
+      "type": "llm_started",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "sequence": 134,
+      "time": 1794300733.512326,
+      "state": "RUNNING",
+      "type": "llm_completed",
+      "provider": "agentrouter",
+      "model": "gpt-5.6-sol",
+      "tokens": 9051
+    },
+    {
+      "sequence": 135,
+      "time": 1794300733.5128162,
+      "state": "RUNNING",
+      "type": "task_completed",
+      "task_id": "synthesis",
+      "agent_id": "analysis"
+    },
+    {
+      "sequence": 136,
+      "time": 1794300733.5131588,
+      "state": "RUNNING",
+      "type": "task_started",
+      "task_id": "report",
+      "agent_id": "reporting",
+      "attempt": 0
+    },
+    {
+      "sequence": 137,
+      "time": 1794300733.5135841,
+      "state": "RUNNING",
+      "type": "task_completed",
+      "task_id": "report",
+      "agent_id": "reporting"
+    },
+    {
+      "sequence": 138,
+      "time": 1794300733.513914,
+      "state": "VERIFYING",
+      "type": "verifying"
+    },
+    {
+      "sequence": 139,
+      "time": 1794300733.516756,
+      "state": "COMPLETED",
+      "type": "verification",
+      "outcome": "PASS"
+    }
+  ]
+}

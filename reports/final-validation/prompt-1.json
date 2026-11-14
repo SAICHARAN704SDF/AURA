@@ -1,0 +1,132 @@
+{
+  "answer": {
+    "answer": "AURORA addresses early multilingual misinformation detection, an area receiving less attention than English-only approaches. PROMID Task 3 consists of multilingual, highly imbalanced Russia–Ukraine conflict tweets collected during the war’s first year, manually annotated, with 8,388 merged training rows. AURORA classifies messages as misinformation or non-misinformation with a confidence score and supports real-time verification through an interactive dashboard. The paper reports significant generalizability and competitive performance on PROMID, but the supplied evidence provides no numerical metrics or detailed model architecture.",
+    "insufficient_evidence": false,
+    "citations": [
+      {
+        "chunk_id": "826fb238-bfba-5cfa-87bd-f452b0ac3a9f",
+        "quote": "multilingual has\nreceived less attention [3, 18]. Moreover, early detection of false news is still a challenging task"
+      },
+      {
+        "chunk_id": "e9158063-4d50-5ce6-afc8-6e0ba8d99b0a",
+        "quote": "tweets pertaining to Russia-Ukrainian War conflict\nas misinformation or non-misinformation tweets."
+      },
+      {
+        "chunk_id": "e9158063-4d50-5ce6-afc8-6e0ba8d99b0a",
+        "quote": "during the first year of the conflict and manually annotated by [19] following the framework [20]."
+      },
+      {
+        "chunk_id": "e9158063-4d50-5ce6-afc8-6e0ba8d99b0a",
+        "quote": "This dataset contains multilingual words and highly imbalanced dataset"
+      },
+      {
+        "chunk_id": "e9158063-4d50-5ce6-afc8-6e0ba8d99b0a",
+        "quote": "We first merge these train set files\ntogether containing total rows 8,388."
+      },
+      {
+        "chunk_id": "59ea051b-5ee1-58fe-aaf0-de109b2462a1",
+        "quote": "categorizes social media messages as either misinformation or non-misinformation"
+      },
+      {
+        "chunk_id": "db9a428b-12a8-5174-8500-6952e10ed171",
+        "quote": "Our approach showed significant generalizability when\ntested on real-world fact-checking scenarios"
+      },
+      {
+        "chunk_id": "db9a428b-12a8-5174-8500-6952e10ed171",
+        "quote": "achieved competitive performance on a highly imbal-\nanced dataset provided by the PROMID Shared task"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "id": "59ea051b-5ee1-58fe-aaf0-de109b2462a1",
+      "document_id": "9a3c3278-3057-5439-901d-d2b725c16cd8",
+      "filename": "FIRE_PROMID_Misinformation_dashboard.pdf",
+      "page": 1,
+      "start": 0,
+      "end": 1165,
+      "text": "AURORA: Automated Understanding and Recognition of\nOmnilingual Misinformation Artefacts\nKailasa Sai Charan1, Utkrisht Suman 1, Roshan Jain 1, Jasneet Kaur 1 and Shakshi Sharma1,∗\n1School of Artificial Intelligence, Bennett University, Greater Noida, UP, India\nAbstract\nMisinformation has disseminated more quickly due to social media’s explosive growth, especially during politically\ndelicate or crisis-driven situations, such as the conflict between Russia and Ukraine. To lessen its detrimental effects\non society and assist policy makers, journalists, and social media moderators, early detection of false information is\ncrucial. In this study, we introduce AURORA, a generalizable, timely, and multilingual misinformation detection\nsystem that categorizes social media messages as either misinformation or non-misinformation along with a\nconfidence score. The PROMID Task 3 dataset, which was made available at the 17th Forum for Information\nRetrieval Evaluation (FIRE) 2025, is used to train our method. It includes multilingual, highly imbalanced tweets\nabout the conflict between Russia and Ukraine. We utilize several machine learning and transformer-based\n",
+      "content_hash": "049394b0e74b6138c0b9ff67c57bd7181a802422c7e49dcd8714160255ac2d38"
+    },
+    {
+      "id": "e9158063-4d50-5ce6-afc8-6e0ba8d99b0a",
+      "document_id": "9a3c3278-3057-5439-901d-d2b725c16cd8",
+      "filename": "FIRE_PROMID_Misinformation_dashboard.pdf",
+      "page": 2,
+      "start": 1942,
+      "end": 3045,
+      "text": "y, an interactive web\nbased dashboard AURORA, where a user can ask on the fly any news being misinformation or not.\n3.1. Data acquisition & Wrangling\nData collection: We used the dataset provided by the FIRE Conference2 2025 Shared Track named\nPrompt RecOvery For Misinformation Detection (PROMID) Task 3 i.e. Misinformation Detection in social\nmedia texts. Precisely, this task aims to classify the tweets pertaining to Russia-Ukrainian War conflict\nas misinformation or non-misinformation tweets. The dataset was collected using the official Twitter\nAPI during the first year of the conflict and manually annotated by [19] following the framework [20].\nThis dataset contains multilingual words and highly imbalanced dataset that further make the problem\ncomplex for generalization purposes.\nData Wrangling: Organizers provided two train data files i.e. misinformation & non-misinformation\ntweets along with their labels & one test file for the final submission. We first merge these train set files\ntogether containing total rows 8,388. Next, in order to make the data ready for model training in the\n",
+      "content_hash": "12245b993c79852fb84133c2aea796f7be4d0bb69927d34506505079db6608b8"
+    },
+    {
+      "id": "db9a428b-12a8-5174-8500-6952e10ed171",
+      "document_id": "9a3c3278-3057-5439-901d-d2b725c16cd8",
+      "filename": "FIRE_PROMID_Misinformation_dashboard.pdf",
+      "page": 5,
+      "start": 1044,
+      "end": 2239,
+      "text": "onfidence score. It is possible to view each\narticle and delete it as well in order to provide customization to user. Furthermore, user can clear all\nthe history at once too.\n4. Conclusion\nIn this study, we presented a multilingual misinformation detection framework that can detect fake\ncontent in a variety of languages and topics. Our approach showed significant generalizability when\ntested on real-world fact-checking scenarios and achieved competitive performance on a highly imbal-\nanced dataset provided by the PROMID Shared task at FIRE Conference, IIT, BHU in 2025. By providing\nreal-time verification capabilities and clear evaluation indicators, the interactive dashboard AURORA\nfurther closes the gap between research and practical deployment. Despite the system’s encouraging\noutcomes, there are still a number of directions for future research. First, multimodal settings like\nimages and metadata—which are increasingly employed in fake news campaigns—can be incorporated\ninto the model to improve it. Second, robustness could be further enhanced by resolving class imbalance\nusing sophisticated methods like contrastive learning or data augmentation. Lastly, incorporating large\n",
+      "content_hash": "e209bb505eed009344a0349358d475446259f1b1d7158c675374e2eaec1f1bf3"
+    },
+    {
+      "id": "826fb238-bfba-5cfa-87bd-f452b0ac3a9f",
+      "document_id": "9a3c3278-3057-5439-901d-d2b725c16cd8",
+      "filename": "FIRE_PROMID_Misinformation_dashboard.pdf",
+      "page": 2,
+      "start": 961,
+      "end": 2092,
+      "text": "en works that studies user-level information on\nsocial media including echo chambers detection, community detection, influential (or powerful) nodes,\netc. [8, 9, 10]. Researchers have also employed more advanced techniques including combining deep\nlearning and graph structure namely, Graph Neural Networks (GNNs) [11] and Knowledge Graphs [12].\nOne of the main goals of previous fake news studies has been the identification of false information\nmainly in English language [13, 14, 15, 16] or separate models for each language [17]; multilingual has\nreceived less attention [3, 18]. Moreover, early detection of false news is still a challenging task, thus,\nwe developed a model that can automatically detect any recent news article irrespective of the language\nand topic.\n3. System Architecture\nThis section focuses on the main architecture of this work. Specifically, we discuss the dataset used\nalong with its preprocessing, training the models based on the dataset, and finally, an interactive web\nbased dashboard AURORA, where a user can ask on the fly any news being misinformation or not.\n3.1. Data acquisition & Wrangling\n",
+      "content_hash": "a69896db84d3e411d13967704265ad5474959c0ea662ed836e70bffab826698a"
+    }
+  ],
+  "retrieval": {
+    "chunks": [
+      {
+        "id": "59ea051b-5ee1-58fe-aaf0-de109b2462a1",
+        "document_id": "9a3c3278-3057-5439-901d-d2b725c16cd8",
+        "filename": "FIRE_PROMID_Misinformation_dashboard.pdf",
+        "page": 1,
+        "start": 0,
+        "end": 1165,
+        "text": "AURORA: Automated Understanding and Recognition of\nOmnilingual Misinformation Artefacts\nKailasa Sai Charan1, Utkrisht Suman 1, Roshan Jain 1, Jasneet Kaur 1 and Shakshi Sharma1,∗\n1School of Artificial Intelligence, Bennett University, Greater Noida, UP, India\nAbstract\nMisinformation has disseminated more quickly due to social media’s explosive growth, especially during politically\ndelicate or crisis-driven situations, such as the conflict between Russia and Ukraine. To lessen its detrimental effects\non society and assist policy makers, journalists, and social media moderators, early detection of false information is\ncrucial. In this study, we introduce AURORA, a generalizable, timely, and multilingual misinformation detection\nsystem that categorizes social media messages as either misinformation or non-misinformation along with a\nconfidence score. The PROMID Task 3 dataset, which was made available at the 17th Forum for Information\nRetrieval Evaluation (FIRE) 2025, is used to train our method. It includes multilingual, highly imbalanced tweets\nabout the conflict between Russia and Ukraine. We utilize several machine learning and transformer-based\n",
+        "content_hash": "049394b0e74b6138c0b9ff67c57bd7181a802422c7e49dcd8714160255ac2d38"
+      },
+      {
+        "id": "e9158063-4d50-5ce6-afc8-6e0ba8d99b0a",
+        "document_id": "9a3c3278-3057-5439-901d-d2b725c16cd8",
+        "filename": "FIRE_PROMID_Misinformation_dashboard.pdf",
+        "page": 2,
+        "start": 1942,
+        "end": 3045,
+        "text": "y, an interactive web\nbased dashboard AURORA, where a user can ask on the fly any news being misinformation or not.\n3.1. Data acquisition & Wrangling\nData collection: We used the dataset provided by the FIRE Conference2 2025 Shared Track named\nPrompt RecOvery For Misinformation Detection (PROMID) Task 3 i.e. Misinformation Detection in social\nmedia texts. Precisely, this task aims to classify the tweets pertaining to Russia-Ukrainian War conflict\nas misinformation or non-misinformation tweets. The dataset was collected using the official Twitter\nAPI during the first year of the conflict and manually annotated by [19] following the framework [20].\nThis dataset contains multilingual words and highly imbalanced dataset that further make the problem\ncomplex for generalization purposes.\nData Wrangling: Organizers provided two train data files i.e. misinformation & non-misinformation\ntweets along with their labels & one test file for the final submission. We first merge these train set files\ntogether containing total rows 8,388. Next, in order to make the data ready for model training in the\n",
+        "content_hash": "12245b993c79852fb84133c2aea796f7be4d0bb69927d34506505079db6608b8"
+      },
+      {
+        "id": "db9a428b-12a8-5174-8500-6952e10ed171",
+        "document_id": "9a3c3278-3057-5439-901d-d2b725c16cd8",
+        "filename": "FIRE_PROMID_Misinformation_dashboard.pdf",
+        "page": 5,
+        "start": 1044,
+        "end": 2239,
+        "text": "onfidence score. It is possible to view each\narticle and delete it as well in order to provide customization to user. Furthermore, user can clear all\nthe history at once too.\n4. Conclusion\nIn this study, we presented a multilingual misinformation detection framework that can detect fake\ncontent in a variety of languages and topics. Our approach showed significant generalizability when\ntested on real-world fact-checking scenarios and achieved competitive performance on a highly imbal-\nanced dataset provided by the PROMID Shared task at FIRE Conference, IIT, BHU in 2025. By providing\nreal-time verification capabilities and clear evaluation indicators, the interactive dashboard AURORA\nfurther closes the gap between research and practical deployment. Despite the system’s encouraging\noutcomes, there are still a number of directions for future research. First, multimodal settings like\nimages and metadata—which are increasingly employed in fake news campaigns—can be incorporated\ninto the model to improve it. Second, robustness could be further enhanced by resolving class imbalance\nusing sophisticated methods like contrastive learning or data augmentation. Lastly, incorporating large\n",
+        "content_hash": "e209bb505eed009344a0349358d475446259f1b1d7158c675374e2eaec1f1bf3"
+      },
+      {
+        "id": "826fb238-bfba-5cfa-87bd-f452b0ac3a9f",
+        "document_id": "9a3c3278-3057-5439-901d-d2b725c16cd8",
+        "filename": "FIRE_PROMID_Misinformation_dashboard.pdf",
+        "page": 2,
+        "start": 961,
+        "end": 2092,
+        "text": "en works that studies user-level information on\nsocial media including echo chambers detection, community detection, influential (or powerful) nodes,\netc. [8, 9, 10]. Researchers have also employed more advanced techniques including combining deep\nlearning and graph structure namely, Graph Neural Networks (GNNs) [11] and Knowledge Graphs [12].\nOne of the main goals of previous fake news studies has been the identification of false information\nmainly in English language [13, 14, 15, 16] or separate models for each language [17]; multilingual has\nreceived less attention [3, 18]. Moreover, early detection of false news is still a challenging task, thus,\nwe developed a model that can automatically detect any recent news article irrespective of the language\nand topic.\n3. System Architecture\nThis section focuses on the main architecture of this work. Specifically, we discuss the dataset used\nalong with its preprocessing, training the models based on the dataset, and finally, an interactive web\nbased dashboard AURORA, where a user can ask on the fly any news being misinformation or not.\n3.1. Data acquisition & Wrangling\n",
+        "content_hash": "a69896db84d3e411d13967704265ad5474959c0ea662ed836e70bffab826698a"
+      }
+    ],
+    "reranked": true,
+    "rerank_error": null,
+    "rerank_seconds": 0.4970173750043614
+  },
+  "usage": 9353,
+  "generation_attempts": 1,
+  "support_validation": "identity_and_exact_quote_only"
+}
