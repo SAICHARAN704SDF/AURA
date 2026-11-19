@@ -1,0 +1,28 @@
+[
+  {
+    "case": "single",
+    "state": "COMPLETED",
+    "error": null,
+    "workflow_id": "cf5dc13c-41df-416a-bc41-762c3ce87f45",
+    "sources_selected": 1,
+    "sources_cited_by_writer": 1,
+    "reported_tokens": 4582,
+    "seconds": 4.668582124999375,
+    "llm_calls": 3,
+    "tool_calls": 2,
+    "verification": "PASS"
+  },
+  {
+    "case": "multiple",
+    "state": "COMPLETED",
+    "error": null,
+    "workflow_id": "8e33a568-80cd-4044-9bf9-d84dc8765d16",
+    "sources_selected": 2,
+    "sources_cited_by_writer": 2,
+    "reported_tokens": 7563,
+    "seconds": 28.896185416000662,
+    "llm_calls": 3,
+    "tool_calls": 2,
+    "verification": "PASS"
+  }
+]

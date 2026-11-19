@@ -1,0 +1,14 @@
+{"split": "train", "text": "BERT was evaluated on SQuAD.", "entities": [[0, 4, "MODEL"], [22, 27, "DATASET"]]}
+{"split": "train", "text": "Researchers measured RoBERTa with GLUE.", "entities": [[21, 28, "MODEL"], [34, 38, "DATASET"]]}
+{"split": "train", "text": "T5 uses self-attention.", "entities": [[0, 2, "MODEL"], [8, 22, "METHOD"]]}
+{"split": "train", "text": "ResNet was tested on ImageNet.", "entities": [[0, 6, "MODEL"], [21, 29, "DATASET"]]}
+{"split": "train", "text": "Our evaluation uses CIFAR-10.", "entities": [[20, 28, "DATASET"]]}
+{"split": "train", "text": "Contrastive learning improved AtlasNet.", "entities": [[0, 20, "METHOD"], [30, 38, "MODEL"]]}
+{"split": "train", "text": "The team applied gradient descent to T5.", "entities": [[17, 33, "METHOD"], [37, 39, "MODEL"]]}
+{"split": "train", "text": "The AtlasNet benchmark uses RiverSet.", "entities": [[4, 12, "MODEL"], [28, 36, "DATASET"]]}
+{"split": "train", "text": "The RiverSet labels were reviewed.", "entities": [[4, 12, "DATASET"]]}
+{"split": "train", "text": "Gradient descent was used during fitting.", "entities": [[0, 16, "METHOD"]]}
+{"split": "test", "text": "AtlasNet was evaluated on RiverSet. This model predicted labels.", "entities": [[0, 8, "MODEL"], [26, 34, "DATASET"]], "summary": "AtlasNet was evaluated on RiverSet.", "relations": [["AtlasNet", "evaluated_on", "RiverSet"]]}
+{"split": "test", "text": "T5 uses gradient descent. This method updates weights.", "entities": [[0, 2, "MODEL"], [8, 24, "METHOD"]], "summary": "T5 uses gradient descent.", "relations": [["T5", "uses", "gradient descent"]]}
+{"split": "test", "text": "ResNet was evaluated on ImageNet. This dataset contains images.", "entities": [[0, 6, "MODEL"], [24, 32, "DATASET"]], "summary": "ResNet was evaluated on ImageNet.", "relations": [["ResNet", "evaluated_on", "ImageNet"]]}
+{"split": "test", "text": "The chart shows latency. Several teams checked the timing.", "entities": [], "summary": "The chart shows latency.", "relations": []}

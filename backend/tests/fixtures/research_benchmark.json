@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "description": "Authored fictional engineering log with frozen gold facts for a reproducible smoke comparison.",
+  "document": "A laboratory evaluated the fictional Cedar-17 data logger. With the ceramic probe it recorded one sample every 37 seconds. The field trial lasted 14 days. A later trial used a metal probe with a 61-second interval. Neither trial measured battery lifetime.",
+  "cases": [
+    {"id": "direct", "question": "What was the sampling interval of the Cedar-17 ceramic probe? Answer in seconds.", "gold_regex": "\\b37\\s*[- ]?seconds?\\b"},
+    {"id": "contrast", "question": "Compare the two Cedar-17 probes' sampling intervals, in seconds.", "gold_regex": "(?s)(?=.*\\b37\\b)(?=.*\\b61\\b)"},
+    {"id": "unanswerable", "question": "What battery lifetime did the Cedar-17 trials measure?", "gold_regex": "(?i)(did not measure|not measured|neither trial measured|insufficient evidence|didn.t measure|not reported)"}
+  ]
+}

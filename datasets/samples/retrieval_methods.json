@@ -1,0 +1,26 @@
+{
+  "description": "Small, authored retrieval exercise on research methodology. Each passage is independent and each question has one or more relevant passage IDs.",
+  "passages": {
+    "control": "Randomly assigning participants to treatment and control groups reduces systematic differences between groups before treatment.",
+    "blinding": "Masking group assignments from the people rating outcomes limits observer bias during evaluation.",
+    "bootstrap": "Bootstrap resampling draws repeated samples with replacement. The variation across estimates can be used to form a confidence interval.",
+    "recall": "Recall divides the count of retrieved relevant records by the count of all relevant records. It measures completeness of search.",
+    "precision": "Precision divides the count of retrieved relevant records by the count of all retrieved records. It measures the purity of a result list.",
+    "ablation": "An ablation experiment removes one component while keeping the remaining system fixed to estimate the contribution of that component.",
+    "leakage": "When near-duplicate records appear in both training and validation partitions, measured performance can be inflated by data leakage.",
+    "latency": "A latency benchmark records elapsed request time and reports quantiles including the median and the ninety-fifth percentile.",
+    "agreement": "Cohen's kappa compares agreement between two independent annotators with the agreement expected by chance.",
+    "stratify": "Stratified sampling draws observations from each defined subgroup, maintaining coverage of rare groups."
+  },
+  "questions": [
+    {"text":"How do I quantify the useful fraction of returned hits?", "relevant":["precision"]},
+    {"text":"Which metric detects relevant documents our search has missed?", "relevant":["recall"]},
+    {"text":"How should I test the effect of disabling the reranker alone?", "relevant":["ablation"]},
+    {"text":"Why might almost identical train and test examples distort validation accuracy?", "relevant":["leakage"]},
+    {"text":"How can we measure whether two human labelers agree beyond coincidence?", "relevant":["agreement"]},
+    {"text":"How can I estimate uncertainty through sampling with replacement?", "relevant":["bootstrap"]},
+    {"text":"How can an experiment limit bias when assigning treatments or scoring outcomes?", "relevant":["control","blinding"]},
+    {"text":"What measurements capture the long tail of response times?", "relevant":["latency"]},
+    {"text":"How do we ensure a small subgroup is included in the sample?", "relevant":["stratify"]}
+  ]
+}

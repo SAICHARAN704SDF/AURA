@@ -1,0 +1,55 @@
+{
+  "base": "en_core_web_sm",
+  "base_version": "3.8.0",
+  "seed": 17,
+  "epochs": 12,
+  "train_documents": 10,
+  "test_documents": 4,
+  "sha256": "c2245c35067ea57aaecc82996ad1f4717b4869aeff15e3101ca93dc90e1a775b",
+  "off_the_shelf": {
+    "ner_exact_span": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "tp": 0,
+      "predicted": 5,
+      "gold": 6
+    },
+    "relation_exact_triple": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 3,
+      "predicted": 3,
+      "gold": 3
+    },
+    "extractive_summary": {
+      "rouge1": 1.0,
+      "rouge2": 1.0,
+      "rougeL": 1.0
+    }
+  },
+  "fine_tuned": {
+    "ner_exact_span": {
+      "precision": 0.8333333333333334,
+      "recall": 0.8333333333333334,
+      "f1": 0.8333333333333334,
+      "tp": 5,
+      "predicted": 6,
+      "gold": 6
+    },
+    "relation_exact_triple": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 3,
+      "predicted": 3,
+      "gold": 3
+    },
+    "extractive_summary": {
+      "rouge1": 1.0,
+      "rouge2": 1.0,
+      "rougeL": 1.0
+    }
+  }
+}

@@ -1,0 +1,41 @@
+name: researchos
+services:
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/api.Dockerfile
+    env_file:
+      - path: "${RESEARCHOS_ENV_FILE:-.env}"
+        required: false
+    environment:
+      DATA_DIR: /workspace/data
+    # Override with your host UID:GID on Linux for an existing bind mount.
+    user: "${RESEARCHOS_CONTAINER_USER:-10001:10001}"
+    volumes:
+      - "${RESEARCHOS_DATA_DIR:-./data}:/workspace/data"
+    ports:
+      - "127.0.0.1:${RESEARCHOS_API_PORT:-8000}:8000"
+    init: true
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 30
+      start_period: 20s
+    stop_grace_period: 2m
+  web:
+    environment:
+      AURA_API_ORIGIN: http://api:8000
+    build:
+      context: .
+      dockerfile: infrastructure/docker/web.Dockerfile
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${RESEARCHOS_WEB_PORT:-3000}:3000"
+    init: true
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]

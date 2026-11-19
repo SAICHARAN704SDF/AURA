@@ -1,0 +1,261 @@
+{
+  "dataset_sha256": "0deabd918095d39d48a87a364efbfdeb91b7505942443fceaffcb783fe8f9689",
+  "passages": 10,
+  "questions": 9,
+  "top_k": 3,
+  "timing": "model load, corpus/query encoding and similarity, CPU seconds",
+  "systems": {
+    "tfidf": {
+      "metrics": {
+        "precision_at_k": 0.2962962962962963,
+        "recall_at_k": 0.8333333333333334,
+        "mrr": 0.8148148148148148,
+        "ndcg_at_k": 0.7903496880850509
+      },
+      "rankings": [
+        {
+          "question": "How do I quantify the useful fraction of returned hits?",
+          "top_ids": [
+            "precision",
+            "recall",
+            "ablation"
+          ]
+        },
+        {
+          "question": "Which metric detects relevant documents our search has missed?",
+          "top_ids": [
+            "recall",
+            "precision",
+            "control"
+          ]
+        },
+        {
+          "question": "How should I test the effect of disabling the reranker alone?",
+          "top_ids": [
+            "precision",
+            "recall",
+            "ablation"
+          ]
+        },
+        {
+          "question": "Why might almost identical train and test examples distort validation accuracy?",
+          "top_ids": [
+            "leakage",
+            "latency",
+            "control"
+          ]
+        },
+        {
+          "question": "How can we measure whether two human labelers agree beyond coincidence?",
+          "top_ids": [
+            "agreement",
+            "bootstrap",
+            "leakage"
+          ]
+        },
+        {
+          "question": "How can I estimate uncertainty through sampling with replacement?",
+          "top_ids": [
+            "bootstrap",
+            "stratify",
+            "ablation"
+          ]
+        },
+        {
+          "question": "How can an experiment limit bias when assigning treatments or scoring outcomes?",
+          "top_ids": [
+            "blinding",
+            "ablation",
+            "leakage"
+          ]
+        },
+        {
+          "question": "What measurements capture the long tail of response times?",
+          "top_ids": [
+            "precision",
+            "recall",
+            "ablation"
+          ]
+        },
+        {
+          "question": "How do we ensure a small subgroup is included in the sample?",
+          "top_ids": [
+            "stratify",
+            "leakage",
+            "precision"
+          ]
+        }
+      ],
+      "seconds": 0.0095,
+      "dimensions": 260
+    },
+    "en_core_web_sm_tok2vec_mean": {
+      "metrics": {
+        "precision_at_k": 0.2222222222222222,
+        "recall_at_k": 0.6111111111111112,
+        "mrr": 0.48148148148148145,
+        "ndcg_at_k": 0.5019758400895554
+      },
+      "rankings": [
+        {
+          "question": "How do I quantify the useful fraction of returned hits?",
+          "top_ids": [
+            "recall",
+            "leakage",
+            "precision"
+          ]
+        },
+        {
+          "question": "Which metric detects relevant documents our search has missed?",
+          "top_ids": [
+            "stratify",
+            "bootstrap",
+            "ablation"
+          ]
+        },
+        {
+          "question": "How should I test the effect of disabling the reranker alone?",
+          "top_ids": [
+            "ablation",
+            "bootstrap",
+            "recall"
+          ]
+        },
+        {
+          "question": "Why might almost identical train and test examples distort validation accuracy?",
+          "top_ids": [
+            "leakage",
+            "latency",
+            "control"
+          ]
+        },
+        {
+          "question": "How can we measure whether two human labelers agree beyond coincidence?",
+          "top_ids": [
+            "leakage",
+            "agreement",
+            "bootstrap"
+          ]
+        },
+        {
+          "question": "How can I estimate uncertainty through sampling with replacement?",
+          "top_ids": [
+            "bootstrap",
+            "control",
+            "ablation"
+          ]
+        },
+        {
+          "question": "How can an experiment limit bias when assigning treatments or scoring outcomes?",
+          "top_ids": [
+            "leakage",
+            "blinding",
+            "bootstrap"
+          ]
+        },
+        {
+          "question": "What measurements capture the long tail of response times?",
+          "top_ids": [
+            "precision",
+            "recall",
+            "ablation"
+          ]
+        },
+        {
+          "question": "How do we ensure a small subgroup is included in the sample?",
+          "top_ids": [
+            "bootstrap",
+            "ablation",
+            "precision"
+          ]
+        }
+      ],
+      "seconds": 0.2853,
+      "dimensions": 96
+    },
+    "sentence-transformers/all-MiniLM-L6-v2": {
+      "metrics": {
+        "precision_at_k": 0.37037037037037035,
+        "recall_at_k": 1.0,
+        "mrr": 0.9259259259259259,
+        "ndcg_at_k": 0.9444444444444444
+      },
+      "rankings": [
+        {
+          "question": "How do I quantify the useful fraction of returned hits?",
+          "top_ids": [
+            "precision",
+            "latency",
+            "recall"
+          ]
+        },
+        {
+          "question": "Which metric detects relevant documents our search has missed?",
+          "top_ids": [
+            "recall",
+            "latency",
+            "leakage"
+          ]
+        },
+        {
+          "question": "How should I test the effect of disabling the reranker alone?",
+          "top_ids": [
+            "blinding",
+            "control",
+            "ablation"
+          ]
+        },
+        {
+          "question": "Why might almost identical train and test examples distort validation accuracy?",
+          "top_ids": [
+            "leakage",
+            "bootstrap",
+            "precision"
+          ]
+        },
+        {
+          "question": "How can we measure whether two human labelers agree beyond coincidence?",
+          "top_ids": [
+            "agreement",
+            "leakage",
+            "precision"
+          ]
+        },
+        {
+          "question": "How can I estimate uncertainty through sampling with replacement?",
+          "top_ids": [
+            "bootstrap",
+            "stratify",
+            "precision"
+          ]
+        },
+        {
+          "question": "How can an experiment limit bias when assigning treatments or scoring outcomes?",
+          "top_ids": [
+            "control",
+            "blinding",
+            "ablation"
+          ]
+        },
+        {
+          "question": "What measurements capture the long tail of response times?",
+          "top_ids": [
+            "latency",
+            "precision",
+            "ablation"
+          ]
+        },
+        {
+          "question": "How do we ensure a small subgroup is included in the sample?",
+          "top_ids": [
+            "stratify",
+            "control",
+            "bootstrap"
+          ]
+        }
+      ],
+      "seconds": 4.082,
+      "dimensions": 384
+    }
+  }
+}

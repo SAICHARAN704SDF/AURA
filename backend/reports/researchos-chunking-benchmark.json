@@ -1,0 +1,49 @@
+{
+  "dataset_sha256": "0deabd918095d39d48a87a364efbfdeb91b7505942443fceaffcb783fe8f9689",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "windowed_strategies": {
+    "size": 250,
+    "overlap": 32
+  },
+  "semantic": {
+    "base_sentence_window": 600,
+    "max_merged_characters": 1800,
+    "overlap": 0,
+    "threshold": 0.8
+  },
+  "top_k": 2,
+  "queries": 9,
+  "gold_minimum_covered_fraction": 0.8,
+  "strategies": {
+    "fixed": {
+      "chunks": 7,
+      "mean_recall_at_k": 0.6666666666666666,
+      "mrr_at_k": 0.6666666666666666,
+      "mean_context_characters": 430.6666666666667
+    },
+    "recursive": {
+      "chunks": 9,
+      "mean_recall_at_k": 0.7777777777777778,
+      "mrr_at_k": 0.7222222222222222,
+      "mean_context_characters": 372.77777777777777
+    },
+    "sentence": {
+      "chunks": 9,
+      "mean_recall_at_k": 0.8888888888888888,
+      "mrr_at_k": 0.8333333333333334,
+      "mean_context_characters": 370.3333333333333
+    },
+    "structure": {
+      "chunks": 10,
+      "mean_recall_at_k": 0.8888888888888888,
+      "mrr_at_k": 0.8333333333333334,
+      "mean_context_characters": 329.1111111111111
+    },
+    "semantic": {
+      "chunks": 3,
+      "mean_recall_at_k": 0.7777777777777778,
+      "mrr_at_k": 0.7222222222222222,
+      "mean_context_characters": 972
+    }
+  }
+}

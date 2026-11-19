@@ -1,0 +1,146 @@
+{
+  "dataset_sha256": "018ea193e71cea199031d589b0d685c223cc6f8949a24cb092fcce04321be65a",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b",
+  "scores": "Gold regex match; human factuality review required.",
+  "runs": [
+    {
+      "case": "direct",
+      "strategy": "plain_llm",
+      "success": true,
+      "answer": "I\u2019m sorry, but I don\u2019t have that information.",
+      "gold_match": false,
+      "seconds": 0.519,
+      "reported_tokens": 147
+    },
+    {
+      "case": "direct",
+      "strategy": "single_rag",
+      "success": true,
+      "citations": 1,
+      "claim_review": "PASS",
+      "answer": "37",
+      "gold_match": false,
+      "seconds": 1.789,
+      "reported_tokens": 1241
+    },
+    {
+      "case": "direct",
+      "strategy": "single_react",
+      "success": true,
+      "state": "COMPLETED",
+      "tool_calls": 1,
+      "llm_calls": 3,
+      "citations": 1,
+      "answer": "The laboratory evaluation of the Cedar\u201117 data logger with the ceramic probe recorded one sample every 37 seconds.",
+      "gold_match": true,
+      "seconds": 2.997,
+      "reported_tokens": 2103
+    },
+    {
+      "case": "direct",
+      "strategy": "collaborative",
+      "success": true,
+      "state": "COMPLETED",
+      "tool_calls": 2,
+      "llm_calls": 3,
+      "citations": 1,
+      "answer": "The Cedar-17 ceramic probe sampled at a rate of one sample every 37 seconds.",
+      "gold_match": true,
+      "seconds": 2.495,
+      "reported_tokens": 2153
+    },
+    {
+      "case": "contrast",
+      "strategy": "plain_llm",
+      "success": true,
+      "answer": "I don\u2019t have the sampling interval data for the two Cedar\u201117 probes, so I can\u2019t compare them.",
+      "gold_match": false,
+      "seconds": 1.022,
+      "reported_tokens": 164
+    },
+    {
+      "case": "contrast",
+      "strategy": "single_rag",
+      "success": true,
+      "citations": 1,
+      "claim_review": "PASS",
+      "answer": "The Cedar\u201117 with the ceramic probe sampled every 37\u202fseconds, while the Cedar\u201117 with the metal probe sampled every 61\u202fseconds.",
+      "gold_match": true,
+      "seconds": 3.978,
+      "reported_tokens": 1258
+    },
+    {
+      "case": "contrast",
+      "strategy": "single_react",
+      "success": true,
+      "state": "COMPLETED",
+      "tool_calls": 1,
+      "llm_calls": 3,
+      "citations": 1,
+      "answer": "The Cedar\u201117 data logger was evaluated with two different probes. The ceramic probe recorded one sample every **37\u202fseconds**, while the metal probe recorded one sample every **61\u202fseconds**.",
+      "gold_match": true,
+      "seconds": 5.549,
+      "reported_tokens": 2198
+    },
+    {
+      "case": "contrast",
+      "strategy": "collaborative",
+      "success": true,
+      "state": "COMPLETED",
+      "tool_calls": 2,
+      "llm_calls": 3,
+      "citations": 1,
+      "answer": "The Cedar\u201117 data logger sampled at a 37\u2011second interval when equipped with the ceramic probe and at a 61\u2011second interval when equipped with the metal probe.",
+      "gold_match": true,
+      "seconds": 9.266,
+      "reported_tokens": 2218
+    },
+    {
+      "case": "unanswerable",
+      "strategy": "plain_llm",
+      "success": true,
+      "answer": "The Cedar\u201117 trials measured a battery lifetime of **about 2\u00bd\u202fyears** (\u2248\u202f2.5\u202fyears) before the power source was depleted.",
+      "gold_match": false,
+      "seconds": 0.527,
+      "reported_tokens": 172
+    },
+    {
+      "case": "unanswerable",
+      "strategy": "single_rag",
+      "success": true,
+      "citations": 1,
+      "claim_review": "PASS",
+      "answer": "Neither trial measured battery lifetime.",
+      "gold_match": true,
+      "seconds": 9.423,
+      "reported_tokens": 1207
+    },
+    {
+      "case": "unanswerable",
+      "strategy": "single_react",
+      "success": true,
+      "state": "COMPLETED",
+      "tool_calls": 1,
+      "llm_calls": 3,
+      "citations": 1,
+      "answer": "The available source excerpt explicitly states that neither the 14\u2011day trial with a ceramic probe nor the later trial with a metal probe measured battery lifetime. Therefore, the Cedar\u201117 trials did not measure battery lifetime.",
+      "gold_match": true,
+      "seconds": 15.031,
+      "reported_tokens": 2190
+    },
+    {
+      "case": "unanswerable",
+      "strategy": "collaborative",
+      "success": true,
+      "state": "COMPLETED",
+      "tool_calls": 2,
+      "llm_calls": 3,
+      "citations": 1,
+      "answer": "The Cedar\u201117 trials did not report battery lifetime. In a laboratory evaluation, the device recorded one sample every 37\u202fseconds with a ceramic probe and the field trial lasted 14\u202fdays. A subsequent trial used a metal probe with a 61\u2011second interval. Neither trial measured battery lifetime.",
+      "gold_match": true,
+      "seconds": 20.56,
+      "reported_tokens": 2322
+    }
+  ]
+}
