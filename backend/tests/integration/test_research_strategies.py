@@ -67,7 +67,8 @@ def test_semantic_memory_scopes_and_ranks(tmp_path):
         memory.close()
 
 
-def test_paused_graph_resumes_after_reopening_database(tmp_path):
+@pytest.mark.parametrize("shutdown",[False, True])
+def test_paused_graph_resumes_after_reopening_database(tmp_path, shutdown):
     from aura.agents.contracts import Plan, Task, TaskOutput
     from aura.memory.manager import Memory
     from aura.orchestration.workflow.engine import Engine
@@ -90,7 +91,11 @@ def test_paused_graph_resumes_after_reopening_database(tmp_path):
         engine.worker=worker
         running=asyncio.create_task(engine.execute(wid,goal.project_id))
         await asyncio.wait_for(started.wait(),5)
-        assert (await engine.pause(wid,goal.project_id))["state"]=="WAITING"
+        if shutdown:
+            await engine.shutdown()
+        else:
+            await engine.pause(wid,goal.project_id)
+        assert memory.get(wid,goal.project_id)["state"]=="WAITING"
         await running
         memory.close()
         memory=Memory(path)

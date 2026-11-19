@@ -162,5 +162,9 @@ class Engine:
         else:self.memory.save(w,{'type':'cancelled'},state='CANCELLED')
         return self.memory.get(id,project)
     async def shutdown(self):
-        for task in list(self.running.values()):task.cancel()
-        await asyncio.gather(*list(self.running.values()),return_exceptions=True)
+        active = list(self.running.items())
+        for identifier, task in active:
+            if identifier not in self.cancelled:
+                self.pausing.add(identifier)
+            task.cancel()
+        await asyncio.gather(*(task for _,task in active),return_exceptions=True)

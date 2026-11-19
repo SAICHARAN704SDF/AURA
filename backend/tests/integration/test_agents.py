@@ -55,9 +55,12 @@ def test_retry_budget_and_cancel(tmp_path):
   e.worker=fail
   r=await e.execute(w['id'],'p');assert r['state']=='FAILED' and calls==2
   wid=m.create(w['goal_id'],'p',Plan(tasks=[task()]).model_dump())
-  async def slow(*args):await asyncio.sleep(20)
+  started=asyncio.Event()
+  async def slow(*args):
+   started.set()
+   await asyncio.sleep(20)
   e.worker=slow
-  job=asyncio.create_task(e.execute(wid,'p'));await asyncio.sleep(.01);e.cancel(wid,'p');await job
+  job=asyncio.create_task(e.execute(wid,'p'));await asyncio.wait_for(started.wait(),5);e.cancel(wid,'p');await job
   assert m.get(wid,'p')['state']=='CANCELLED'
   assert m.get(wid,'p')['tasks']['one']['state']=='CANCELLED';m.close()
  asyncio.run(check())
