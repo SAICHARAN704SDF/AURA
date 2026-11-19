@@ -47,6 +47,8 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: '1'
       - run: npm run typecheck
-      - run: npx playwright install --with-deps chromium
+      - run: google-chrome --version
       - run: npm test
+        env:
+          RESEARCHOS_CHROME: /usr/bin/google-chrome
       - run: docker compose --project-directory ../.. -f ../../docker-compose.yml config --quiet
