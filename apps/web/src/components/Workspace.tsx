@@ -10,11 +10,11 @@ import * as Tabs from "@radix-ui/react-tabs";
 import {
   Activity,
   BookOpen,
-  Boxes,
+  ArrowUpRight,
   Check,
-  ChevronRight,
+
   ClipboardList,
-  Database,
+
   Download,
   FileText,
   Folder,
@@ -46,6 +46,7 @@ import {
   type Source,
   type Task,
 } from "../lib/api";
+import Contour from "./Contour";
 import Workflow from "./Workflow";
 import { Button } from "./ui/button";
 import Results from "./Results";
@@ -508,63 +509,27 @@ function Console() {
   const recent = history.data?.[0];
   return (
     <div className="shell">
-      <aside className="sidebar">
-        <div className="identity">
-          <div className="mark">
-            <Layers size={23} />
-          </div>
-          <div>
-            <b>ResearchOS</b>
-            <small>AURA workspace</small>
-          </div>
+      <header className="masthead">
+        <div className="mast-inner">
+          <div className="wordmark"><Layers size={23}/><b>ResearchOS</b></div>
+          <span className="connection"><i className={"dot "+(status.isSuccess?"online":"")}/>{status.isSuccess?"Connected":status.isError?"Offline":"Connecting"}</span>
+          <button className="project" disabled={busy} onClick={()=>choose("settings")}><Folder size={15}/>{project}</button>
         </div>
-        <p className="side-label">Workspace</p>
-        <nav>
-          {nav.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              className={view === id ? "active" : ""}
-              disabled={busy}
-              onClick={() => choose(id)}
-            >
-              <Icon size={17} />
-              {label}
-            </button>
-          ))}
-        </nav>
-        <div className="side-foot">
-          <span className={"dot " + (status.isSuccess ? "online" : "")} />
-          {status.isSuccess
-            ? "API connected"
-            : status.isError
-              ? "API unavailable"
-              : "Connecting…"}
-        </div>
-      </aside>
+        <nav aria-label="Workspace" className="desk-nav">{nav.map(({id,label,icon:Icon})=>(
+          <button key={id} disabled={busy} aria-current={view===id?"page":undefined} onClick={()=>choose(id)}><Icon size={16}/>{label}</button>
+        ))}</nav>
+      </header>
       <main>
-        <header className="crumb">
-          <span>
-            <Layers size={15} /> Workspace <ChevronRight size={13} />{" "}
-            <b>{modes[mode][0]}</b>
-          </span>
-          <button
-            disabled={busy}
-            className="project"
-            onClick={() => choose("settings")}
-          >
-            <Folder size={15} />
-            {project}
-          </button>
-        </header>
         <div className="body">
-          <div className="heading">
+          <div className="atlas-header">
+            <Contour />
             <motion.div
               key={mode}
               initial={reduced ? false : { opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.18 }}
             >
-              <h1>{modes[mode][0]}</h1>
+              <h1>{modes[mode][0]}<span aria-hidden="true">.</span></h1>
               <p>{modes[mode][1]}</p>
             </motion.div>
             {mode === "library" && (
@@ -591,28 +556,16 @@ function Console() {
             </p>
           )}
           {view === "answer" && (
-            <div className="stat-grid">
-              {[
-                [Database, "Sources", docs.data?.length ?? "—"],
-                [
-                  GitBranch,
-                  "Saved runs",
-                  history.data
-                    ? history.data.length +
-                      (history.data.length === 30 ? "+" : "")
-                    : "—",
-                ],
-                [Boxes, "Generation provider", status.data?.provider ?? "—"],
-              ].map(([I, k, v]) => {
-                const Icon = I as typeof Database;
-                return (
-                  <div className="stat" key={String(k)}>
-                    <Icon size={18} />
-                    <small>{String(k)}</small>
-                    <strong>{String(v)}</strong>
-                  </div>
-                );
-              })}
+            <div className="desk-shortcuts">
+              {([
+                ["library",Folder,"Open library",docs.data ? docs.data.length+" indexed sources" : "Upload a paper"],
+                ["workflow",GitBranch,"Create a report","Follow the agents live"],
+                ["language",ScanText,"Explore language","Inspect entities and relations"]
+              ] as const).map(([id,Icon,title,detail])=>(
+                <button key={id} disabled={busy} onClick={()=>choose(id)}>
+                  <Icon size={22}/><span><b>{title}</b><small>{detail}</small></span><ArrowUpRight size={17}/>
+                </button>
+              ))}
             </div>
           )}
           {["answer", "search", "workflow", "language"].includes(mode) && (

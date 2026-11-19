@@ -42,3 +42,11 @@ docker compose down
 Use the same `-p researchos-demo` option for a separately named instance. `down` removes its containers and network. The host data directory persists. Stop the service before copying the entire data directory for a consistent backup of SQLite and Qdrant. Restore a backup into a separate directory and point `RESEARCHOS_DATA_DIR` there. If the host reports a database write-permission error, verify the configured container UID and the directory's ownership.
 
 CI installs the locked frontend dependencies, runs lint, checks TypeScript, builds the application and executes the offline Playwright tests with Google Chrome on the hosted Ubuntu runner. For independent browser testing from the checkout, install the root Python test dependencies and English spaCy model, then run `npm ci`, `npx playwright install chromium` and `npm test` from `apps/web`.
+
+## Render
+
+Create a Docker web service from the release checkout with repository root as the build context and `infrastructure/docker/api.Dockerfile` as its Dockerfile. The final image runs the Next.js UI and the single API worker on loopback. Caddy exposes the service port. Configure `/healthz` as the health check. The UI and its API require HTTP Basic login over Render HTTPS.
+
+Set `RESEARCHOS_PASSWORD_HASH` to the bcrypt result of running `caddy hash-password` interactively. Log in as `researcher` with the original password. Add the existing application's required provider settings as secret environment variables. The Render management API key belongs outside the application. Mount the persistent disk at `/workspace/data` and use one instance for embedded Qdrant. A fresh disk starts with an empty library.
+
+After deploying, verify anonymous access to the UI and API returns 401. Sign in, upload a paper, wait for indexing, search for a passage, generate a cited report, inspect its workflow and download the result. Restart the service and verify the uploaded paper and completed run can be reopened. The public health endpoint only checks API process readiness.

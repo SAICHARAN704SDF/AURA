@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: infrastructure/docker/api.Dockerfile
+      target: api
     env_file:
       - path: "${RESEARCHOS_ENV_FILE:-.env}"
         required: false

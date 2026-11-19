@@ -29,3 +29,6 @@
 **/.env*
 **/*.key
 **/*.pem
+
+!infrastructure/docker/Caddyfile
+!infrastructure/docker/render-start.sh
