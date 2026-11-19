@@ -1,5 +1,9 @@
 # AURA document research assistant
 
+**[Open AURA ResearchOS on Render](https://aura-researchos-demo.onrender.com)** · **[Current release and demo walkthrough](https://github.com/SAICHARAN704SDF/AURA/tree/codex/researchos-release#readme)**
+
+The deployed Next.js workspace lives on `codex/researchos-release`. Use its README for setup, the live agent workflow and the presentation demo. The instructions below describe this branch.
+
 Python 3.12 backend for document indexing, cited answers, NLP, and auditable agent workflows. LLM inference is hosted; no local model weights are loaded.
 
 ## Project layout
