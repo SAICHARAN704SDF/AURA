@@ -1,19 +1,28 @@
-# ResearchOS · AURA research workspace
+# AURA ResearchOS
 
-A local student project combining Generative AI, Agentic AI and NLP. Upload documents, ask cited questions, generate bounded research reports, inspect language features and watch recorded workflow events. AURA uses existing hosted models; it does not train a foundation model.
+AURA helps students turn a research paper into a report they can check against the source. Upload a paper, ask a question, and follow the agents as they retrieve passages, draft findings and check citations.
 
-**Open the workspace at http://127.0.0.1:3000.** The Research desk answers questions with passages from a selected paper. Agent workflows generate reviewed reports with a live task graph. Language lab explores entities, relations, summaries and the trained NER comparison.
+**[Open the live demo](https://aura-researchos-demo.onrender.com)** · **[Deployment guide](docs/deployment.md)** · **[Evaluation results](ROADMAP.md)**
 
-Start the backend using the Python steps below. In a second terminal, start the Next.js interface:
+The Render demo uses a shared researcher login. Get the password from the project owner. Use public papers for demonstrations and download any report you want to keep. The free service uses temporary storage and can lose uploads and run history on restart or redeployment.
 
-```sh
-cd apps/web
-npm ci
-npm run build
-npm start
-```
+## Try one paper
 
-For Docker, follow [single-machine deployment](docs/deployment.md). For measured results and the five-phase checklist, see [release evidence](ROADMAP.md).
+1. Open **Source library → Upload files**. Choose a PDF and wait for the indexing confirmation.
+2. In **Research desk**, select the paper and ask “What problem do the authors study, and which passage describes their method?” Open the source passage to check the answer.
+3. In **Agent workflows**, enter “Write a report on the method, findings and one limitation. Cite the paper for each finding.” Under **Workflow design & budgets**, choose **Collaborative review**, then **Launch workflow**.
+4. Watch **Live workflow** and click a task to inspect its description. Check the reported tool calls, model calls and token usage. When the report finishes, choose **Download report**.
+5. In **Language lab**, analyze a passage from the same paper to inspect entities and relationships, compare sentence meanings or generate a summary.
+
+## How a report is made
+
+| Component | What it does in AURA |
+|---|---|
+| NLP | Extracts text, splits it into passages and preserves source references. The language lab exposes entity extraction, relationships, summaries and similarity as separate operations. |
+| Retrieval | Cloudflare generates embeddings. Qdrant indexes the vectors so the backend can find relevant passages from the selected sources. |
+| Agent workflow | LangGraph runs planning, executes tasks whose dependencies are ready, and repeats until the run reaches verification. The browser shows the tasks for that particular run. |
+| Generation and review | The model gateway sends the question and retrieved evidence to the configured model. Source checks can flag unsupported output. A reader can inspect the passages alongside the answer. |
+| State and interface | SQLite holds workflow and memory records. The Next.js workspace talks to FastAPI and displays execution events. |
 
 ## Structure
 
@@ -53,10 +62,10 @@ AURA/
 
 ## Install and run
 
-Use Python 3.12. Run all commands from the repository root, not inside backend, so the single .env and existing data paths resolve correctly. Keep any existing environment and .env; do not overwrite them.
+From a fresh clone, check out the deployed version with `git switch codex/researchos-release`. Configure the root `.env` using the table below. For Docker, follow the [Compose instructions](docs/deployment.md). For a native installation, use Python 3.12 and Node.js 22. Start the API from the repository root:
 
 ```sh
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[test]'
 python -m spacy download en_core_web_sm
@@ -65,7 +74,16 @@ python backend/scripts/init_db.py
 python backend/main.py
 ```
 
-Open http://127.0.0.1:8000. OCR setup is optional for native-text documents. The original interface is available on port 8000. The new workspace runs on port 3000. Use one server worker for local Qdrant. If port 8000 is already occupied, use the existing server; do not start another process against the same local vector data.
+In a second terminal, start the web workspace from the same checkout:
+
+```sh
+cd apps/web
+npm ci
+npm run build
+npm start
+```
+
+Open the [research workspace](http://127.0.0.1:3000). OCR setup is optional for native-text documents. The original interface is available on port 8000. The new workspace runs on port 3000. Use one server worker for local Qdrant. If port 8000 is already occupied, use the existing server; do not start another process against the same local vector data.
 
 ## One local environment file
 
@@ -105,7 +123,7 @@ Node also builds and serves the Next.js workspace. Tests use mocks/temporary sto
 
 ## Limitations
 
-The code defaults to a small Groq model; no automatic expensive fallback is enabled for the main generation path. Exact citations and model claim review do not guarantee correctness. OCR can misread handwriting. The new UI streams real events over SSE; the original dashboard polls every 700 ms; model text is buffered. Detailed events are a bounded memory buffer; SQLite persists workflow records. This is a local single-user, unauthenticated application. Cloudflare AI is separate from a tunnel, which AURA does not manage.
+The code defaults to a small Groq model; no automatic expensive fallback is enabled for the main generation path. Exact citations and model claim review do not guarantee correctness. OCR can misread handwriting. The new UI streams real events over SSE; the original dashboard polls every 700 ms; model text is buffered. Detailed events are a bounded memory buffer; SQLite persists workflow records. The local API assumes a single trusted user and binds to loopback by default. The Render deployment protects the workspace and its API with a login. Cloudflare AI is separate from a tunnel, which AURA does not manage.
 
 ## Show the actual LangGraph
 
